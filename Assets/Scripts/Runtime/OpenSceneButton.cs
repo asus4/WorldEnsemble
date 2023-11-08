@@ -1,28 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-
-[RequireComponent(typeof(Button))]
-public class OpenSceneButton : MonoBehaviour
+namespace AugmentedInstrument
 {
-    [SerializeField] private string sceneName;
+    using UnityEngine;
+    using UnityEngine.SceneManagement;
+    using UnityEngine.UI;
 
-    private void OnEnable()
+    [RequireComponent(typeof(Button))]
+    public sealed class OpenSceneButton : MonoBehaviour
     {
-        var button = GetComponent<Button>();
-        button.onClick.AddListener(OnButtonTap);
-    }
+        [SerializeField] private string sceneName;
 
-    private void OnDisable()
-    {
-        var button = GetComponent<Button>();
-        button.onClick.RemoveListener(OnButtonTap);
-    }
+        private void OnEnable()
+        {
+            var button = GetComponent<Button>();
+            button.onClick.AddListener(OnButtonTap);
+        }
 
-    private void OnButtonTap()
-    {
-        SceneManager.LoadScene(sceneName);
+        private void OnDisable()
+        {
+            var button = GetComponent<Button>();
+            button.onClick.RemoveListener(OnButtonTap);
+        }
+
+        private void OnButtonTap()
+        {
+            SceneManager.LoadScene(sceneName);
+        }
     }
 }

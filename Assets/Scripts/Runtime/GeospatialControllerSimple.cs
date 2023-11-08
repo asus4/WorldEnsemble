@@ -1,3 +1,5 @@
+// Modified by asus4 based on Googles Geospatial Sample
+
 // <copyright file="GeospatialController.cs" company="Google LLC">
 //
 // Copyright 2022 Google LLC
@@ -17,7 +19,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace Google.XR.ARCoreExtensions.Samples.Geospatial
+namespace AugmentedInstrument
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -28,16 +30,16 @@ namespace Google.XR.ARCoreExtensions.Samples.Geospatial
     using UnityEngine.XR.ARFoundation;
     using UnityEngine.XR.ARSubsystems;
     using Unity.XR.CoreUtils;
-    using ARFoundationReplay;
+    using Google.XR.ARCoreExtensions;
 
 #if UNITY_ANDROID
     using UnityEngine.Android;
 #endif
 
     /// <summary>
-    /// Controller for Geospatial sample.
+    /// Simple version of Geospatial mesh
     /// </summary>
-    public class GeospatialControllerSimple : MonoBehaviour
+    public sealed class GeospatialControllerSimple : MonoBehaviour
     {
         private AREarthManager _earthManager;
         private ARStreetscapeGeometryManager _streetScapeGeometryManager;
@@ -61,13 +63,9 @@ namespace Google.XR.ARCoreExtensions.Samples.Geospatial
 
         private void Awake()
         {
-            Screen.orientation = ScreenOrientation.Portrait;
-            Application.targetFrameRate = 60;
-
             var origin = FindObjectOfType<XROrigin>();
             _earthManager = origin.GetComponent<AREarthManager>();
             _streetScapeGeometryManager = origin.GetComponent<ARStreetscapeGeometryManager>();
-            Debug.Log("Geospatial sample initialized.");
 
             _propertyBlocks = streetscapeColors.Select(color =>
             {
@@ -77,9 +75,6 @@ namespace Google.XR.ARCoreExtensions.Samples.Geospatial
             }).ToArray();
         }
 
-        /// <summary>
-        /// Unity's OnEnable() method.
-        /// </summary>
         public void OnEnable()
         {
             _streetScapeGeometryManager.StreetscapeGeometriesChanged += GetStreetscapeGeometry;
@@ -153,7 +148,7 @@ namespace Google.XR.ARCoreExtensions.Samples.Geospatial
 
             Pose pose = geometry.pose;
 
-            // Check if a render object already exists for this streetscapegeometry and
+            // Check if a render object already exists for this streetscape geometry and
             // create one if not.
             if (_streetScapeGeometries.TryGetValue(geometry.trackableId, out GameObject go))
             {
@@ -162,7 +157,7 @@ namespace Google.XR.ARCoreExtensions.Samples.Geospatial
                 return;
             }
 
-            go = new GameObject("StreetscapeGeometryMesh");
+            go = new GameObject($"StreetscapeGeometryMesh");
             go.AddComponent<MeshFilter>().sharedMesh = geometry.mesh;
 
             // Set materials
@@ -176,9 +171,11 @@ namespace Google.XR.ARCoreExtensions.Samples.Geospatial
             }
             else
             {
+                // For Terrain type
                 renderer.SetPropertyBlock(_propertyBlocks[0]);
             }
 
+            go.transform.SetParent(transform, false);
             go.transform.SetPositionAndRotation(pose.position, pose.rotation);
             _streetScapeGeometries.Add(geometry.trackableId, go);
         }

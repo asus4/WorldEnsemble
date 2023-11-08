@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 384014292}
   - component: {fileID: 384014293}
   m_Layer: 0
-  m_Name: GeospatialController
+  m_Name: Scripts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1310,5 +1310,5 @@ SceneRoots:
   - {fileID: 1476232296}
   - {fileID: 683091023}
   - {fileID: 1154590969}
-  - {fileID: 384014292}
   - {fileID: 1848301129}
+  - {fileID: 384014292}
