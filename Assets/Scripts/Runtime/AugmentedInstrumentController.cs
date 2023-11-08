@@ -10,10 +10,20 @@ namespace AugmentedInstrument
     /// </summary>
     public sealed class AugmentedInstrumentController : MonoBehaviour
     {
+        [SerializeField]
+        private float _dspTime;
+
+        private static readonly int _DspTimeID = Shader.PropertyToID("_DspTime");
+
         private void Awake()
         {
             Application.targetFrameRate = 60;
         }
 
+        private void Update()
+        {
+            _dspTime = Time.realtimeSinceStartup;
+            Shader.SetGlobalFloat(_DspTimeID, _dspTime);
+        }
     }
 }

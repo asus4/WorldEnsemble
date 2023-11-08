@@ -257,6 +257,7 @@ GameObject:
   m_Component:
   - component: {fileID: 384014292}
   - component: {fileID: 384014293}
+  - component: {fileID: 384014294}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -298,6 +299,21 @@ MonoBehaviour:
   - {r: 1, g: 0.57580614, b: 0, a: 0.24705882}
   - {r: 0, g: 0.54109573, b: 1, a: 0.24705882}
   - {r: 0.9824476, g: 1, b: 0, a: 0.24705882}
+  generateNormal: 1
+  generateTangent: 1
+--- !u!114 &384014294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384014290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36826739aebf14216bcc7701cd585fb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dspTime: 0
 --- !u!1 &569233390
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,7 +821,7 @@ MonoBehaviour:
   m_AutoFocus: 1
   m_LightEstimation: -1
   m_FacingDirection: 1
-  m_RenderMode: 0
+  m_RenderMode: 1
 --- !u!4 &1451910695
 Transform:
   m_ObjectHideFlags: 0
@@ -844,7 +860,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0

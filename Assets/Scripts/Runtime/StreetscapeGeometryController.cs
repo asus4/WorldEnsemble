@@ -39,7 +39,7 @@ namespace AugmentedInstrument
     /// <summary>
     /// Simple version of Geospatial mesh
     /// </summary>
-    public sealed class GeospatialControllerSimple : MonoBehaviour
+    public sealed class StreetscapeGeometryController : MonoBehaviour
     {
         private AREarthManager _earthManager;
         private ARStreetscapeGeometryManager _streetScapeGeometryManager;
@@ -52,6 +52,12 @@ namespace AugmentedInstrument
         private Material streetscapeMaterial;
         [SerializeField]
         private Color[] streetscapeColors;
+
+        [SerializeField]
+        private bool generateNormal = false;
+        [SerializeField]
+        private bool generateTangent = false;
+
 
         private int _buildingMatIndex = 0;
         private Dictionary<TrackableId, GameObject> _streetScapeGeometries = new();
@@ -157,8 +163,18 @@ namespace AugmentedInstrument
                 return;
             }
 
+            var mesh = geometry.mesh;
+            if (generateNormal)
+            {
+                mesh.RecalculateNormals();
+            }
+            if (generateTangent)
+            {
+                mesh.RecalculateTangents();
+            }
+
             go = new GameObject($"StreetscapeGeometryMesh");
-            go.AddComponent<MeshFilter>().sharedMesh = geometry.mesh;
+            go.AddComponent<MeshFilter>().sharedMesh = mesh;
 
             // Set materials
             var renderer = go.AddComponent<MeshRenderer>();
