@@ -54,9 +54,11 @@ namespace AugmentedInstrument
         private Color[] streetscapeColors;
 
         [SerializeField]
-        private bool generateNormal = false;
+        private bool calculateNormal = false;
         [SerializeField]
-        private bool generateTangent = false;
+        private bool calculateTangent = false;
+        [SerializeField]
+        private bool useCollider = false;
 
 
         private int _buildingMatIndex = 0;
@@ -164,17 +166,22 @@ namespace AugmentedInstrument
             }
 
             var mesh = geometry.mesh;
-            if (generateNormal)
+            if (calculateNormal)
             {
                 mesh.RecalculateNormals();
             }
-            if (generateTangent)
+            if (calculateTangent)
             {
                 mesh.RecalculateTangents();
             }
 
             go = new GameObject($"StreetscapeGeometryMesh");
             go.AddComponent<MeshFilter>().sharedMesh = mesh;
+
+            if (useCollider)
+            {
+                go.AddComponent<MeshCollider>().sharedMesh = mesh;
+            }
 
             // Set materials
             var renderer = go.AddComponent<MeshRenderer>();

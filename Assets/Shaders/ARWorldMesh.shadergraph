@@ -24,9 +24,6 @@
     "m_CategoryData": [
         {
             "m_Id": "25353d3f2e5b4932959f10c692365214"
-        },
-        {
-            "m_Id": "ed2110611c0c4fb487c527a4f411e18c"
         }
     ],
     "m_Nodes": [
@@ -1002,6 +999,9 @@
         },
         {
             "m_Id": "2b875c86a8c645e292ca1293da202769"
+        },
+        {
+            "m_Id": "6026f0d31a644db1ae8b6ae8d0f8027f"
         }
     ]
 }
@@ -3376,18 +3376,6 @@
         "m_SerializableColors": []
     },
     "m_SerializedDescriptor": "VertexDescription.Position"
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.CategoryData",
-    "m_ObjectId": "ed2110611c0c4fb487c527a4f411e18c",
-    "m_Name": "Global Params",
-    "m_ChildObjectList": [
-        {
-            "m_Id": "6026f0d31a644db1ae8b6ae8d0f8027f"
-        }
-    ]
 }
 
 {

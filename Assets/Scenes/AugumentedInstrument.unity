@@ -299,8 +299,9 @@ MonoBehaviour:
   - {r: 1, g: 0.57580614, b: 0, a: 0.24705882}
   - {r: 0, g: 0.54109573, b: 1, a: 0.24705882}
   - {r: 0.9824476, g: 1, b: 0, a: 0.24705882}
-  generateNormal: 1
-  generateTangent: 1
+  calculateNormal: 1
+  calculateTangent: 1
+  useCollider: 1
 --- !u!114 &384014294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,7 +314,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36826739aebf14216bcc7701cd585fb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dspTime: 0
+  _touchAction:
+    m_Name: Touch
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: dae0610f-37e9-4692-aadc-6ce86d58d625
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: One Modifier
+      m_Id: 0130169b-5695-40bf-83a7-b9bfcb180264
+      m_Path: OneModifier
+      m_Interactions: Press
+      m_Processors: 
+      m_Groups: 
+      m_Action: Touch
+      m_Flags: 4
+    - m_Name: modifier
+      m_Id: 963e7f2a-233c-4577-bbbf-30037e5d33a1
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Touch
+      m_Flags: 8
+    - m_Name: binding
+      m_Id: 2ba78812-6a64-432a-b781-0b3943b6b02c
+      m_Path: <Mouse>/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Touch
+      m_Flags: 8
+    m_Flags: 0
+  _kickAction:
+    m_Name: Kick
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 3196bbfc-8309-456a-ac0c-be2187f3d3cf
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 8cd54b9f-7176-44fa-a83b-3bbb8a98b8fe
+      m_Path: <Keyboard>/#(K)
+      m_Interactions: Press
+      m_Processors: 
+      m_Groups: 
+      m_Action: Kick
+      m_Flags: 0
+    m_Flags: 0
+  _debugInstrumentPrefab: {fileID: 919132149155446097, guid: e5707b0cb622b47fb942d3453575b5e0,
+    type: 3}
 --- !u!1 &569233390
 GameObject:
   m_ObjectHideFlags: 0
