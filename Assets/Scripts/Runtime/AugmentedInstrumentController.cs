@@ -11,17 +11,21 @@ namespace AugmentedInstrument
     /// </summary>
     public sealed class AugmentedInstrumentController : MonoBehaviour
     {
+        [Header("Input Actions")]
         [SerializeField]
         private InputAction _touchAction;
         [SerializeField]
         private InputAction _kickAction;
 
+        [Header("Prefabs")]
         [SerializeField]
-        private GameObject _debugInstrumentPrefab;
-
-        private double _startDspTime;
+        private ARInstrument _instrumentPrefab;
 
         private static readonly int _DspTimeID = Shader.PropertyToID("_DspTime");
+
+        private readonly List<ARInstrument> _instruments = new();
+        private double _startDspTime;
+
 
         private InputAction[] AllActions => new InputAction[]
         {
@@ -68,13 +72,15 @@ namespace AugmentedInstrument
             Ray ray = Camera.main.ScreenPointToRay(screenPos);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                Debug.Log($"Hit: {hit}");
+                Debug.Log($"Put instrument at: {hit}");
                 Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.yellow, 1f);
-                // hit.transform.GetComponent<Instrument>().Play();
-                // Put a debug instrument
+
+                // Put a instrument
                 Quaternion rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-                var go = Instantiate(_debugInstrumentPrefab, hit.point, rotation);
-                go.transform.SetParent(hit.transform);
+                var instrument = Instantiate(_instrumentPrefab, hit.point, rotation);
+                instrument.transform.SetParent(hit.transform);
+
+                _instruments.Add(instrument);
             }
         }
 

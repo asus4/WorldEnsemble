@@ -274,7 +274,7 @@ Transform:
   m_GameObject: {fileID: 384014290}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 833, y: 654, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -364,7 +364,7 @@ MonoBehaviour:
       m_Action: Kick
       m_Flags: 0
     m_Flags: 0
-  _debugInstrumentPrefab: {fileID: 919132149155446097, guid: e5707b0cb622b47fb942d3453575b5e0,
+  _instrumentPrefab: {fileID: 5285664139553300732, guid: 7cf19f3b892f7493e987f3bf41440dde,
     type: 3}
 --- !u!1 &569233390
 GameObject:
