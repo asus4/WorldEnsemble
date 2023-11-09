@@ -292,13 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dced70479d6aa4e26b29515ce638ab66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugText: {fileID: 1664493018}
   streetscapeMaterial: {fileID: 2100000, guid: 775ce3c1866ce4692b5d2cd9c1848a39, type: 2}
-  streetscapeColors:
-  - {r: 0.15395391, g: 1, b: 0, a: 0.24705882}
-  - {r: 1, g: 0.57580614, b: 0, a: 0.24705882}
-  - {r: 0, g: 0.54109573, b: 1, a: 0.24705882}
-  - {r: 0.9824476, g: 1, b: 0, a: 0.24705882}
   calculateNormal: 1
   calculateTangent: 1
   useCollider: 1
@@ -314,37 +308,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36826739aebf14216bcc7701cd585fb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _touchAction:
-    m_Name: Touch
+  _touchDragAction:
+    m_Name: Touch Drag
     m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: dae0610f-37e9-4692-aadc-6ce86d58d625
+    m_ExpectedControlType: Vector2
+    m_Id: ddd90916-e6e3-4bed-9f3c-2cb496b6e7d9
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: One Modifier
-      m_Id: 0130169b-5695-40bf-83a7-b9bfcb180264
+      m_Id: 6fa3285a-8362-4800-b090-959f43658dbb
       m_Path: OneModifier
-      m_Interactions: Press
+      m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Touch
+      m_Action: Touch Drag
       m_Flags: 4
     - m_Name: modifier
-      m_Id: 963e7f2a-233c-4577-bbbf-30037e5d33a1
-      m_Path: <Mouse>/leftButton
+      m_Id: 2d5dbeb1-be6f-49eb-b7c8-d7992cf754b6
+      m_Path: <Pointer>/press
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Touch
+      m_Action: Touch Drag
       m_Flags: 8
     - m_Name: binding
-      m_Id: 2ba78812-6a64-432a-b781-0b3943b6b02c
-      m_Path: <Mouse>/position
+      m_Id: 39cc7553-9876-4f25-8b96-2e047c009169
+      m_Path: <Pointer>/position
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Touch
+      m_Action: Touch Drag
+      m_Flags: 8
+    m_Flags: 0
+  _touchDecideAction:
+    m_Name: Touch Decide
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 49f70331-3da7-48a1-ae05-8ecf84570eea
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: One Modifier
+      m_Id: 6de593f4-72d5-4891-be4a-d6ddf942e94c
+      m_Path: OneModifier
+      m_Interactions: Press(behavior=1)
+      m_Processors: 
+      m_Groups: 
+      m_Action: Touch Decide
+      m_Flags: 4
+    - m_Name: modifier
+      m_Id: 18dd2fba-3b46-44b6-8958-664102d34e40
+      m_Path: <Pointer>/press
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Touch Decide
+      m_Flags: 8
+    - m_Name: binding
+      m_Id: bef8ab3f-5604-45de-ad4c-d2ac202c710e
+      m_Path: <Pointer>/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Touch Decide
       m_Flags: 8
     m_Flags: 0
   _kickAction:
@@ -365,6 +392,8 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
   _instrumentPrefab: {fileID: 5285664139553300732, guid: 7cf19f3b892f7493e987f3bf41440dde,
+    type: 3}
+  _cursorPrefab: {fileID: 2992071860135720732, guid: 86a31f08d672d4398b880e5a8f859fda,
     type: 3}
 --- !u!1 &569233390
 GameObject:
@@ -1041,16 +1070,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451910690}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b15f82cc229284894964d2d30806969d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_HumanSegmentationStencilMode: 1
   m_HumanSegmentationDepthMode: 1
-  m_EnvironmentDepthMode: 3
+  m_EnvironmentDepthMode: 0
   m_EnvironmentDepthTemporalSmoothing: 1
-  m_OcclusionPreferenceMode: 0
+  m_OcclusionPreferenceMode: 1
 --- !u!1 &1476232294
 GameObject:
   m_ObjectHideFlags: 0

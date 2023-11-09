@@ -43,10 +43,6 @@ namespace AugmentedInstrument
         private AREarthManager _earthManager;
         private ARStreetscapeGeometryManager _streetScapeGeometryManager;
 
-
-        [Header("UI Elements")]
-        [SerializeField] Text DebugText;
-
         [SerializeField]
         private Material streetscapeMaterial;
 
@@ -58,11 +54,7 @@ namespace AugmentedInstrument
         private bool useCollider = false;
 
 
-        private Dictionary<TrackableId, GameObject> _streetScapeGeometries = new();
-
-        private bool _isInitialized = false;
-        private readonly StringBuilder _sb = new();
-
+        private readonly Dictionary<TrackableId, GameObject> _streetScapeGeometries = new();
 
         private void Awake()
         {
@@ -108,15 +100,6 @@ namespace AugmentedInstrument
             {
                 Debug.LogWarning($"Geospatial sample encountered an EarthState error: {earthState}");
                 yield break;
-            }
-            _isInitialized = true;
-        }
-
-        private void Update()
-        {
-            if (Debug.isDebugBuild)
-            {
-                UpdateDebugInfo();
             }
         }
 
@@ -222,32 +205,6 @@ namespace AugmentedInstrument
                     "Location service ended with {0} status.", Input.location.status);
                 Input.location.Stop();
             }
-        }
-
-
-        private void UpdateDebugInfo()
-        {
-            bool isPoseAvailable = _earthManager.EarthState == EarthState.Enabled
-                && _earthManager.EarthTrackingState == TrackingState.Tracking;
-            var pose = isPoseAvailable
-                ? _earthManager.CameraGeospatialPose
-                : new GeospatialPose();
-            var supported = _earthManager.IsGeospatialModeSupported(GeospatialMode.Enabled);
-
-            _sb.Clear();
-            _sb.AppendLine($"IsInitialized: {_isInitialized}");
-            _sb.AppendLine($"SessionState: {ARSession.state}");
-            _sb.AppendLine($"LocationServiceStatus: {Input.location.status}");
-            _sb.AppendLine($"FeatureSupported: {supported}");
-            _sb.AppendLine($"EarthState: {_earthManager.EarthState}");
-            _sb.AppendLine($"EarthTrackingState: {_earthManager.EarthTrackingState}");
-            _sb.AppendLine($"  LAT/LNG: {pose.Latitude:F6}, {pose.Longitude:F6}");
-            _sb.AppendLine($"  HorizontalAcc: {pose.HorizontalAccuracy:F6}");
-            _sb.AppendLine($"  ALT: {pose.Altitude:F2}");
-            _sb.AppendLine($"  VerticalAcc: {pose.VerticalAccuracy:F2}");
-            _sb.AppendLine($"  EunRotation: {pose.EunRotation:F2}");
-            _sb.AppendLine($"  OrientationYawAcc: {pose.OrientationYawAccuracy:F2}");
-            DebugText.text = _sb.ToString();
         }
     }
 }
