@@ -23,7 +23,6 @@ namespace AugmentedInstrument
 {
     using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Text;
     using UnityEngine;
     using UnityEngine.UI;
@@ -50,8 +49,6 @@ namespace AugmentedInstrument
 
         [SerializeField]
         private Material streetscapeMaterial;
-        [SerializeField]
-        private Color[] streetscapeColors;
 
         [SerializeField]
         private bool calculateNormal = false;
@@ -61,26 +58,17 @@ namespace AugmentedInstrument
         private bool useCollider = false;
 
 
-        private int _buildingMatIndex = 0;
         private Dictionary<TrackableId, GameObject> _streetScapeGeometries = new();
 
         private bool _isInitialized = false;
         private readonly StringBuilder _sb = new();
 
-        private MaterialPropertyBlock[] _propertyBlocks;
 
         private void Awake()
         {
             var origin = FindObjectOfType<XROrigin>();
             _earthManager = origin.GetComponent<AREarthManager>();
             _streetScapeGeometryManager = origin.GetComponent<ARStreetscapeGeometryManager>();
-
-            _propertyBlocks = streetscapeColors.Select(color =>
-            {
-                var mpb = new MaterialPropertyBlock();
-                mpb.SetColor("_BaseColor", color);
-                return mpb;
-            }).ToArray();
         }
 
         public void OnEnable()
@@ -124,10 +112,12 @@ namespace AugmentedInstrument
             _isInitialized = true;
         }
 
-
         private void Update()
         {
-            UpdateDebugInfo();
+            if (Debug.isDebugBuild)
+            {
+                UpdateDebugInfo();
+            }
         }
 
 
@@ -186,17 +176,6 @@ namespace AugmentedInstrument
             // Set materials
             var renderer = go.AddComponent<MeshRenderer>();
             renderer.sharedMaterial = streetscapeMaterial;
-            if (geometry.streetscapeGeometryType == StreetscapeGeometryType.Building)
-            {
-                int length = _propertyBlocks.Length - 1;
-                renderer.SetPropertyBlock(_propertyBlocks[1 + _buildingMatIndex % length]);
-                _buildingMatIndex++;
-            }
-            else
-            {
-                // For Terrain type
-                renderer.SetPropertyBlock(_propertyBlocks[0]);
-            }
 
             go.transform.SetParent(transform, false);
             go.transform.SetPositionAndRotation(pose.position, pose.rotation);
@@ -269,7 +248,6 @@ namespace AugmentedInstrument
             _sb.AppendLine($"  EunRotation: {pose.EunRotation:F2}");
             _sb.AppendLine($"  OrientationYawAcc: {pose.OrientationYawAccuracy:F2}");
             DebugText.text = _sb.ToString();
-
         }
     }
 }

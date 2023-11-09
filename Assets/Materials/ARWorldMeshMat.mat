@@ -17,7 +17,7 @@ Material:
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2100
+  m_CustomRenderQueue: 2900
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -97,7 +97,9 @@ Material:
     - _Glossiness: 0.5
     - _GlossinessSource: 0
     - _GlossyReflections: 1
-    - _LineWidth: 0.0182
+    - _InvLineMeter: 0
+    - _LinePeriodicScale: 0.05
+    - _LineWidth: 0.005
     - _Metallic: 0
     - _Mode: 3
     - _NormalOffset: 0.24
@@ -123,7 +125,7 @@ Material:
     - _BaseColor: {r: 0, g: 0.7019608, b: 0, a: 1}
     - _Color: {r: 0, g: 0.7019608, b: 0, a: 0.34117648}
     - _EmissionColor: {r: 0, g: 0.48235294, b: 0, a: 1}
-    - _LineColor: {r: 0, g: 6.498019, b: 0.74401265, a: 1}
+    - _LineColor: {r: 2, g: 1.375478, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &5967111570889969271
