@@ -12,19 +12,30 @@ namespace AugmentedInstrument
     [RequireComponent(typeof(AudioSource))]
     public sealed class ARInstrument : MonoBehaviour
     {
-        private AudioSource _audioSource;
-        private readonly RhythmMachine _rhythmMachine = RhythmMachine.Instance;
+        [SerializeField]
+        private SixteenthBeat _beat;
 
-        void Start()
+        public SixteenthBeat BeatMask => _beat;
+
+        private AudioSource _audioSource;
+        private RhythmMachine _rhythmMachine = RhythmMachine.Instance;
+
+        private double _lastPlayedDspTime = -1.0;
+
+        private void Start()
         {
-            Debug.Log("Hello, ARInstrument!");
             _audioSource = GetComponent<AudioSource>();
         }
 
-        public void PlaySound()
+        public void PlaySound(double delay = 0.0)
         {
-            Debug.Log("Playing sound!");
-            _audioSource.PlayScheduled(0.2);
+            if (_rhythmMachine.DspTime - _lastPlayedDspTime < _rhythmMachine.SixteenthNoteDuration)
+            {
+                return;
+            }
+            Debug.Log($"PlaySound: {gameObject.name}, delay: {delay:F2}");
+            _audioSource.PlayScheduled(delay);
+            _lastPlayedDspTime = _rhythmMachine.DspTime + delay;
         }
     }
 }

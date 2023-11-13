@@ -39,6 +39,7 @@ namespace AugmentedInstrument
         private void Awake()
         {
             Application.targetFrameRate = 60;
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
             _touchDragAction.performed += OnTouchDrag;
             _touchDecideAction.performed += OnTouchDecide;
@@ -46,8 +47,12 @@ namespace AugmentedInstrument
 
             _cursor = Instantiate(_cursorPrefab);
             _cursor.transform.SetParent(transform);
+        }
 
-            _rhythmMachine.Start();
+        private void Start()
+        {
+            AudioListener audioListener = FindObjectOfType<AudioListener>();
+            _rhythmMachine.Start(120, audioListener);
         }
 
         private void OnDestroy()
@@ -125,7 +130,8 @@ namespace AugmentedInstrument
 
         private void OnKick(InputAction.CallbackContext ctx)
         {
-            _rhythmMachine.PlaySound();
+            // Keep this for testing on Editor
+            _rhythmMachine.PlayAll();
         }
 
         private void RunHaptics(float seconds)
