@@ -54,16 +54,16 @@ namespace AugmentedInstrument
                 (float)sixteenthBeat
             ));
 
-            double durationUntilNextSixteenthBeat = SixteenthNoteDuration - (dspTime % SixteenthNoteDuration);
             SixteenthBeat nextSixteenthBeat = (SixteenthBeat)(1 << ((int)sixteenthBeat + 1) % 16);
+            double delay = SixteenthNoteDuration - (dspTime % SixteenthNoteDuration);
 
-            Debug.Log($"bar: {totalBars:F1}, 4: {quarterBeat:F1}, 16: {sixteenthBeat:F1}, next: {nextSixteenthBeat}");
+            Debug.Log($"bar: {totalBars:F2}, 4: {quarterBeat:F2}, 16: {sixteenthBeat:F2}, next: {nextSixteenthBeat}, delay: {delay:F2}");
 
             foreach (var instrument in _instruments)
             {
                 if (instrument.BeatMask.HasFlag(nextSixteenthBeat))
                 {
-                    instrument.PlaySound(durationUntilNextSixteenthBeat);
+                    instrument.PlaySound(delay);
                 }
             }
         }

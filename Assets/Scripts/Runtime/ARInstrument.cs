@@ -15,6 +15,9 @@ namespace AugmentedInstrument
         [SerializeField]
         private SixteenthBeat _beat;
 
+        [SerializeField]
+        private ParticleSystem _particle;
+
         public SixteenthBeat BeatMask => _beat;
 
         private AudioSource _audioSource;
@@ -36,6 +39,13 @@ namespace AugmentedInstrument
             Debug.Log($"PlaySound: {gameObject.name}, delay: {delay:F2}");
             _audioSource.PlayScheduled(delay);
             _lastPlayedDspTime = _rhythmMachine.DspTime + delay;
+
+            if (_particle != null)
+            {
+                var main = _particle.main;
+                main.startDelayMultiplier = (float)delay;
+                _particle.Play();
+            }
         }
     }
 }
