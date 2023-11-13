@@ -808,6 +808,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1451910695}
   - component: {fileID: 1451910691}
+  - component: {fileID: 1451910699}
   - component: {fileID: 1451910697}
   - component: {fileID: 1451910693}
   - component: {fileID: 1451910692}
@@ -1080,6 +1081,14 @@ MonoBehaviour:
   m_EnvironmentDepthMode: 0
   m_EnvironmentDepthTemporalSmoothing: 1
   m_OcclusionPreferenceMode: 1
+--- !u!81 &1451910699
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451910690}
+  m_Enabled: 1
 --- !u!1 &1476232294
 GameObject:
   m_ObjectHideFlags: 0

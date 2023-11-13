@@ -2,7 +2,6 @@
 namespace AugmentedInstrument
 {
     using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.InputSystem;
 
@@ -25,12 +24,10 @@ namespace AugmentedInstrument
         [SerializeField]
         private RaycastCursor _cursorPrefab;
 
-        private static readonly int _DspTimeID = Shader.PropertyToID("_DspTime");
 
-        private readonly List<ARInstrument> _instruments = new();
-        private double _startDspTime;
         private Vector2 _lastPointerPosition;
         private RaycastCursor _cursor;
+        private readonly RhythmMachine _rhythmMachine = RhythmMachine.Instance;
 
         private InputAction[] AllActions => new InputAction[]
         {
@@ -42,7 +39,6 @@ namespace AugmentedInstrument
         private void Awake()
         {
             Application.targetFrameRate = 60;
-            _startDspTime = AudioSettings.dspTime;
 
             _touchDragAction.performed += OnTouchDrag;
             _touchDecideAction.performed += OnTouchDecide;
@@ -50,6 +46,8 @@ namespace AugmentedInstrument
 
             _cursor = Instantiate(_cursorPrefab);
             _cursor.transform.SetParent(transform);
+
+            _rhythmMachine.Start();
         }
 
         private void OnDestroy()
@@ -78,27 +76,46 @@ namespace AugmentedInstrument
 
         private void Update()
         {
-            float dspTime = (float)(AudioSettings.dspTime - _startDspTime);
-            Shader.SetGlobalFloat(_DspTimeID, dspTime);
+            _rhythmMachine.Tick();
+
         }
 
         private void OnTouchDrag(InputAction.CallbackContext ctx)
         {
             _lastPointerPosition = ctx.ReadValue<Vector2>();
+            Raycast(false);
+        }
 
-            // Raycast to the world
+        private void OnTouchDecide(InputAction.CallbackContext ctx)
+        {
+            Debug.Log($"OnTouchDecide: {ctx}");
+            Raycast(true);
+        }
+
+        private void Raycast(bool needPlacement)
+        {
+            // Raycast to streetscape geometries
             Ray ray = Camera.main.ScreenPointToRay(_lastPointerPosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.blue, 0.05f);
+                Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.blue);
 
-                _cursor.SetRaycastHit(ray, hit);
-                // Put a instrument
-                // Quaternion rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-                // var instrument = Instantiate(_instrumentPrefab, hit.point, rotation);
-                // instrument.transform.SetParent(hit.transform);
+                if (needPlacement)
+                {
+                    // Put a instrument
+                    Quaternion rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+                    var instrument = Instantiate(_instrumentPrefab, hit.point, rotation);
+                    instrument.transform.SetParent(hit.transform);
 
-                // _instruments.Add(instrument);
+                    _rhythmMachine.RegisterInstrument(instrument);
+                    _cursor.SetRaycastHitNone();
+
+                    RunHaptics(0.1f);
+                }
+                else
+                {
+                    _cursor.SetRaycastHit(ray, hit);
+                }
             }
             else
             {
@@ -106,30 +123,21 @@ namespace AugmentedInstrument
             }
         }
 
-        private void OnTouchDecide(InputAction.CallbackContext ctx)
-        {
-            Debug.Log($"OnTouchDecide: {ctx}");
-
-            // Raycast to the world
-            Ray ray = Camera.main.ScreenPointToRay(_lastPointerPosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                Debug.Log($"Put instrument at: {hit}");
-                Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.red, 1f);
-
-                // Put a instrument
-                Quaternion rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-                var instrument = Instantiate(_instrumentPrefab, hit.point, rotation);
-                instrument.transform.SetParent(hit.transform);
-
-                _instruments.Add(instrument);
-            }
-            _cursor.SetRaycastHitNone();
-        }
-
         private void OnKick(InputAction.CallbackContext ctx)
         {
-            Debug.Log($"OnKick: {ctx}");
+            _rhythmMachine.PlaySound();
+        }
+
+        private void RunHaptics(float seconds)
+        {
+            StartCoroutine(RunHapticsInternal(seconds));
+        }
+
+        private static IEnumerator RunHapticsInternal(float seconds)
+        {
+            InputSystem.ResumeHaptics();
+            yield return new WaitForSeconds(seconds);
+            InputSystem.PauseHaptics();
         }
 
     }
