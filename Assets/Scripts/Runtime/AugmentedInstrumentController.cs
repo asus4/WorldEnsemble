@@ -131,7 +131,7 @@ namespace AugmentedInstrument
         private void OnKick(InputAction.CallbackContext ctx)
         {
             // Keep this for testing on Editor
-            _rhythmMachine.PlayAll();
+            Debug.Log($"OnKick: {ctx}");
         }
 
         private void RunHaptics(float seconds)

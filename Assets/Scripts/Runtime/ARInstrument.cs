@@ -21,7 +21,7 @@ namespace AugmentedInstrument
         public SixteenthBeat BeatMask => _beat;
 
         private AudioSource _audioSource;
-        private RhythmMachine _rhythmMachine = RhythmMachine.Instance;
+        private readonly RhythmMachine _rhythmMachine = RhythmMachine.Instance;
 
         private double _lastPlayedDspTime = -1.0;
 
@@ -36,9 +36,11 @@ namespace AugmentedInstrument
             {
                 return;
             }
-            Debug.Log($"PlaySound: {gameObject.name}, delay: {delay:F2}");
+            // Debug.Log($"PlaySound: {gameObject.name}, delay: {delay:F2}");
             _audioSource.PlayScheduled(delay);
             _lastPlayedDspTime = _rhythmMachine.DspTime + delay;
+
+            // Visual effects
 
             if (_particle != null)
             {

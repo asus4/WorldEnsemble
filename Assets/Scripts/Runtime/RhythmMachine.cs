@@ -57,7 +57,7 @@ namespace AugmentedInstrument
             SixteenthBeat nextSixteenthBeat = (SixteenthBeat)(1 << ((int)sixteenthBeat + 1) % 16);
             double delay = SixteenthNoteDuration - (dspTime % SixteenthNoteDuration);
 
-            Debug.Log($"bar: {totalBars:F2}, 4: {quarterBeat:F2}, 16: {sixteenthBeat:F2}, next: {nextSixteenthBeat}, delay: {delay:F2}");
+            // Debug.Log($"bar: {totalBars:F2}, 4: {quarterBeat:F2}, 16: {sixteenthBeat:F2}, next: {nextSixteenthBeat}, delay: {delay:F2}");
 
             foreach (var instrument in _instruments)
             {
@@ -71,14 +71,6 @@ namespace AugmentedInstrument
         public void RegisterInstrument(ARInstrument instrument)
         {
             _instruments.Add(instrument);
-        }
-
-        public void PlayAll()
-        {
-            foreach (ARInstrument instrument in _instruments)
-            {
-                instrument.PlaySound();
-            }
         }
 
     }
