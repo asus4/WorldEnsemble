@@ -11,6 +11,9 @@ namespace AugmentedInstrument
     /// </summary>
     public sealed class AugmentedInstrumentController : MonoBehaviour
     {
+        [SerializeField]
+        private AppSettings _settings;
+
         [Header("Input Actions")]
         [SerializeField]
         private InputAction _touchDragAction;
@@ -24,7 +27,6 @@ namespace AugmentedInstrument
         private ARInstrument[] _instrumentPrefabs;
         [SerializeField]
         private RaycastCursor _cursorPrefab;
-
 
         private Vector2 _lastPointerPosition;
         private RaycastCursor _cursor;
@@ -54,7 +56,7 @@ namespace AugmentedInstrument
         private void Start()
         {
             AudioListener audioListener = FindObjectOfType<AudioListener>();
-            _sequencer.Start(120, audioListener);
+            _sequencer.Start(_settings.BPM, audioListener);
         }
 
         private void OnDestroy()

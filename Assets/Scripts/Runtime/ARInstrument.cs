@@ -1,5 +1,3 @@
-
-
 namespace AugmentedInstrument
 {
     using System.Collections;
