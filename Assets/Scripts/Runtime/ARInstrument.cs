@@ -21,26 +21,33 @@ namespace AugmentedInstrument
         public SixteenthBeat BeatMask => _beat;
 
         private AudioSource _audioSource;
-        private readonly RhythmMachine _rhythmMachine = RhythmMachine.Instance;
 
-        private double _lastPlayedDspTime = -1.0;
+        private int _lastSixteenthBeat = -1;
 
         private void Start()
         {
             _audioSource = GetComponent<AudioSource>();
         }
 
-        public void PlaySound(double delay = 0.0)
+        public void Tick(in RhythmMachine.SequencerParameters times)
         {
-            if (_rhythmMachine.DspTime - _lastPlayedDspTime < _rhythmMachine.SixteenthNoteDuration)
+            int currentSixteenthBeat = (int)times.sixteenthBeat;
+            if (currentSixteenthBeat == _lastSixteenthBeat)
             {
                 return;
             }
+
+            _lastSixteenthBeat = currentSixteenthBeat;
+
+            if (!BeatMask.HasFlag(times.nextSixteenthBeat))
+            {
+                return;
+            }
+
+            double delay = times.durationUntilNextSixteenthBeat;
+
             // Debug.Log($"PlaySound: {gameObject.name}, delay: {delay:F2}");
             _audioSource.PlayScheduled(delay);
-            _lastPlayedDspTime = _rhythmMachine.DspTime + delay;
-
-            // Visual effects
 
             if (_particle != null)
             {
