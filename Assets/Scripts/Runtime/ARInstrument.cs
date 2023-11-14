@@ -10,7 +10,7 @@ namespace AugmentedInstrument
     /// An instrument that is instantiated in the AR world.
     /// </summary>
     [RequireComponent(typeof(AudioSource))]
-    public sealed class ARInstrument : MonoBehaviour
+    public sealed class ARInstrument : MonoBehaviour, ISequencerListener
     {
         [SerializeField]
         private SixteenthBeat _beat;
@@ -29,7 +29,7 @@ namespace AugmentedInstrument
             _audioSource = GetComponent<AudioSource>();
         }
 
-        public void Tick(in RhythmMachine.SequencerParameters times)
+        public void Tick(in SequencerTimes times)
         {
             int currentSixteenthBeat = (int)times.sixteenthBeat;
             if (currentSixteenthBeat == _lastSixteenthBeat)

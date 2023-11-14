@@ -27,7 +27,7 @@ namespace AugmentedInstrument
 
         private Vector2 _lastPointerPosition;
         private RaycastCursor _cursor;
-        private readonly RhythmMachine _rhythmMachine = RhythmMachine.Instance;
+        private readonly RhythmSequencer _sequencer = RhythmSequencer.Instance;
 
         private InputAction[] AllActions => new InputAction[]
         {
@@ -52,7 +52,7 @@ namespace AugmentedInstrument
         private void Start()
         {
             AudioListener audioListener = FindObjectOfType<AudioListener>();
-            _rhythmMachine.Start(120, audioListener);
+            _sequencer.Start(120, audioListener);
         }
 
         private void OnDestroy()
@@ -81,7 +81,7 @@ namespace AugmentedInstrument
 
         private void Update()
         {
-            _rhythmMachine.Tick();
+            _sequencer.Tick();
 
         }
 
@@ -111,7 +111,7 @@ namespace AugmentedInstrument
                     var instrument = Instantiate(_instrumentPrefab, hit.point, rotation);
                     instrument.transform.SetParent(hit.transform);
 
-                    _rhythmMachine.RegisterInstrument(instrument);
+                    _sequencer.RegisterReceiver(instrument);
                     _cursor.SetRaycastHitNone();
 
                     RunHaptics(0.1f);

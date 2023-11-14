@@ -4,54 +4,26 @@ namespace AugmentedInstrument
     using System.Linq;
     using UnityEngine;
 
+    public interface ISequencerListener
+    {
+        void Tick(in SequencerTimes times);
+    }
+
     /// <summary>
     /// Global rhythm machine.
     /// </summary>
-    public sealed class RhythmMachine
+    public sealed class RhythmSequencer
     {
-        public readonly struct SequencerParameters
-        {
-            public readonly double dspTime;
-            public readonly double loudness;
-            public readonly double sixteenthBeat;
-            public readonly SixteenthBeat nextSixteenthBeat;
-            public readonly double durationUntilNextSixteenthBeat;
-
-            public SequencerParameters(
-                double dspTime,
-                double loudness,
-                double sixteenthBeat,
-                SixteenthBeat nextSixteenthBeat,
-                double durationUntilNextSixteenthBeat
-            )
-            {
-                this.dspTime = dspTime;
-                this.loudness = loudness;
-                this.sixteenthBeat = sixteenthBeat;
-                this.nextSixteenthBeat = nextSixteenthBeat;
-                this.durationUntilNextSixteenthBeat = durationUntilNextSixteenthBeat;
-            }
-
-            public readonly Vector4 AsVector4 =>
-                new(
-                    (float)dspTime,
-                    (float)loudness,
-                    (float)sixteenthBeat,
-                    (float)durationUntilNextSixteenthBeat
-                );
-        }
-
-        public static RhythmMachine Instance { get; } = new RhythmMachine();
+        public static RhythmSequencer Instance { get; } = new RhythmSequencer();
 
         private double _bpm;
         private double _quarterNoteDuration;
 
-        private AudioListener _audioListener;
         private Transform _audioListenerTransform;
 
         private double _startDspTime;
         private readonly float[] _outputSamples = new float[256];
-        private readonly List<ARInstrument> _instruments = new();
+        private readonly List<ISequencerListener> _receivers = new();
 
         public double BarDuration => _quarterNoteDuration * 4.0;
         public double QuarterNoteDuration => _quarterNoteDuration;
@@ -65,7 +37,6 @@ namespace AugmentedInstrument
 
         public void Start(double bpm, AudioListener audioListener)
         {
-            _audioListener = audioListener;
             _audioListenerTransform = audioListener.transform;
 
             _bpm = bpm;
@@ -82,7 +53,7 @@ namespace AugmentedInstrument
             AudioListener.GetOutputData(_outputSamples, 0);
             float loudness = _outputSamples.Sum(x => Mathf.Abs(x)) / _outputSamples.Length;
 
-            SequencerParameters times = new(
+            SequencerTimes times = new(
                 dspTime: dspTime,
                 loudness: loudness,
                 sixteenthBeat: sixteenthBeat,
@@ -93,7 +64,7 @@ namespace AugmentedInstrument
             // Send to global shader value
             Shader.SetGlobalVector(_DspTimeID, times.AsVector4);
 
-            foreach (var instrument in _instruments)
+            foreach (var instrument in _receivers)
             {
                 instrument.Tick(times);
             }
@@ -101,9 +72,9 @@ namespace AugmentedInstrument
             // Debug.Log($"bar: {totalBars:F2}, 4: {quarterBeat:F2}, 16: {sixteenthBeat:F2}, next: {nextSixteenthBeat}, delay: {delay:F2}");
         }
 
-        public void RegisterInstrument(ARInstrument instrument)
+        public void RegisterReceiver(ISequencerListener receiver)
         {
-            _instruments.Add(instrument);
+            _receivers.Add(receiver);
         }
 
     }
