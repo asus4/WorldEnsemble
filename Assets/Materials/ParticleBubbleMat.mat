@@ -108,7 +108,7 @@ Material:
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _ColorBlend: 0.247
-    - _ColorOverlayMix: 0.414
+    - _ColorOverlayMix: 0.341
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -120,7 +120,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _LoudnessMultiplier: 1
+    - _LoudnessMultiplier: 0.821
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005

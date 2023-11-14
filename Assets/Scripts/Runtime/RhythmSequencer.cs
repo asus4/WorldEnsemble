@@ -16,10 +16,19 @@ namespace AugmentedInstrument
             private const int HISTORY_COUNT = 128;
             private static readonly Queue<float> _history = new(HISTORY_COUNT); // roughly 2 seconds
 
+            private const float FALL_DOWN_RATE = 0.5f;
+            private static float _loudness = 0.0f;
+
+
             public static float GetLoudness()
             {
                 AudioListener.GetOutputData(_outputSamples, 0);
                 float loudness = _outputSamples.Sum(x => Mathf.Abs(x)) / _outputSamples.Length;
+
+                // slow down the change
+                _loudness = loudness < _loudness
+                    ? Mathf.Lerp(_loudness, loudness, Time.deltaTime / FALL_DOWN_RATE)
+                    : loudness;
 
                 _history.Enqueue(loudness);
                 if (_history.Count > HISTORY_COUNT)
@@ -34,7 +43,9 @@ namespace AugmentedInstrument
                     min = Mathf.Min(min, value);
                     max = Mathf.Max(max, value);
                 }
-                return Mathf.InverseLerp(min, max, loudness);
+
+                float normalized = Mathf.InverseLerp(min, max, loudness);
+                return normalized;
             }
         }
 
