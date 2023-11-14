@@ -9,23 +9,49 @@ namespace AugmentedInstrument
     /// </summary>
     public sealed class RhythmSequencer
     {
+        private static class LoudnessMeter
+        {
+            private static readonly float[] _outputSamples = new float[512];
+            // TODO: should replace with circular buffer
+            private const int HISTORY_COUNT = 128;
+            private static readonly Queue<float> _history = new(HISTORY_COUNT); // roughly 2 seconds
+
+            public static float GetLoudness()
+            {
+                AudioListener.GetOutputData(_outputSamples, 0);
+                float loudness = _outputSamples.Sum(x => Mathf.Abs(x)) / _outputSamples.Length;
+
+                _history.Enqueue(loudness);
+                if (_history.Count > HISTORY_COUNT)
+                {
+                    _history.Dequeue();
+                }
+                // Normalize into 0.0 - 1.0
+                float min = float.MaxValue;
+                float max = float.MinValue;
+                foreach (float value in _history)
+                {
+                    min = Mathf.Min(min, value);
+                    max = Mathf.Max(max, value);
+                }
+                return Mathf.InverseLerp(min, max, loudness);
+            }
+        }
+
         public static RhythmSequencer Instance { get; } = new RhythmSequencer();
 
-        private double _bpm;
         private double _quarterNoteDuration;
 
         private Transform _audioListenerTransform;
 
         private double _startDspTime;
-        private readonly float[] _outputSamples = new float[256];
-        private readonly List<ARInstrument> _instruments = new();
 
-        public double BarDuration => _quarterNoteDuration * 4.0;
-        public double QuarterNoteDuration => _quarterNoteDuration;
-        public double SixteenthNoteDuration => _quarterNoteDuration / 4.0;
+        private readonly List<ARInstrument> _instruments = new();
 
 
         public double DspTime => AudioSettings.dspTime - _startDspTime;
+        public double SixteenthNoteDuration => _quarterNoteDuration / 4.0;
+
 
         // DSP time for shader
         private static readonly int _SequencerTimesID = Shader.PropertyToID("_SequencerTimes");
@@ -34,7 +60,6 @@ namespace AugmentedInstrument
         {
             _audioListenerTransform = audioListener.transform;
 
-            _bpm = bpm;
             _startDspTime = AudioSettings.dspTime;
             _quarterNoteDuration = 60.0 / bpm;
         }
@@ -45,9 +70,7 @@ namespace AugmentedInstrument
             double sixteenthNoteDuration = SixteenthNoteDuration;
             double sixteenthBeat = dspTime / sixteenthNoteDuration % 16.0;
 
-            AudioListener.GetOutputData(_outputSamples, 0);
-            float loudness = _outputSamples.Sum(x => Mathf.Abs(x)) / _outputSamples.Length;
-            Debug.Log($"loudness: {loudness:F2}");
+            float loudness = LoudnessMeter.GetLoudness();
 
             SequencerTimes times = new(
                 dspTime: dspTime,
