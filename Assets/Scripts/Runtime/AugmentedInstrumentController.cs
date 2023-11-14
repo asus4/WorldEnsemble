@@ -93,7 +93,6 @@ namespace AugmentedInstrument
 
         private void OnTouchDecide(InputAction.CallbackContext ctx)
         {
-            Debug.Log($"OnTouchDecide: {ctx}");
             Raycast(true);
         }
 
@@ -116,6 +115,8 @@ namespace AugmentedInstrument
                     _cursor.SetRaycastHitNone();
 
                     RunHaptics(0.1f);
+
+                    Debug.Log($"Placed: {instrument.name}", instrument);
                 }
                 else
                 {
