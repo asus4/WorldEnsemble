@@ -435,7 +435,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 819051715}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -444,7 +444,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -153}
+  m_AnchoredPosition: {x: 0, y: -247.1}
   m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &819051717
@@ -688,7 +688,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Next
+  m_text: NEXT
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8ce26fe6f2fa645c2863d681ec1c8d07, type: 2}
   m_sharedMaterial: {fileID: 3957074780688391976, guid: 8ce26fe6f2fa645c2863d681ec1c8d07,
@@ -716,8 +716,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -856,8 +856,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87eb26cb7f4224ff897940382f9f6bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalAngle: 15
-  verticalAngle: 15
+  _horizontalAngleScale: 15
+  _verticalAngleScale: 15
+  _clampMaxVelocityMagnitude: 2
+  _smoothTime: 0.39
 --- !u!1 &1590086297
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,7 +895,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 6.8, y: 96}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 240, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1590086299
 MonoBehaviour:
@@ -915,11 +917,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'HOW
-
-    TO
-
-    USE.'
+  m_text: Watch your surroundings and play.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8ce26fe6f2fa645c2863d681ec1c8d07, type: 2}
   m_sharedMaterial: {fileID: 3957074780688391976, guid: 8ce26fe6f2fa645c2863d681ec1c8d07,
@@ -947,8 +945,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 64
-  m_fontSizeBase: 64
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1138,7 +1136,7 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1696997503}
   - {fileID: 569233392}
   - {fileID: 683091023}
   - {fileID: 1154590969}
-  - {fileID: 1696997503}
