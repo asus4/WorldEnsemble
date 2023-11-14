@@ -2,6 +2,7 @@
 namespace AugmentedInstrument
 {
     using System.Collections;
+    using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.InputSystem;
 
@@ -20,7 +21,7 @@ namespace AugmentedInstrument
 
         [Header("Prefabs")]
         [SerializeField]
-        private ARInstrument _instrumentPrefab;
+        private ARInstrument[] _instrumentPrefabs;
         [SerializeField]
         private RaycastCursor _cursorPrefab;
 
@@ -28,6 +29,7 @@ namespace AugmentedInstrument
         private Vector2 _lastPointerPosition;
         private RaycastCursor _cursor;
         private readonly RhythmSequencer _sequencer = RhythmSequencer.Instance;
+        private readonly List<ARInstrument> _instruments = new();
 
         private InputAction[] AllActions => new InputAction[]
         {
@@ -108,9 +110,11 @@ namespace AugmentedInstrument
                 {
                     // Put a instrument
                     Quaternion rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-                    var instrument = Instantiate(_instrumentPrefab, hit.point, rotation);
+                    var prefab = _instrumentPrefabs[_instruments.Count % _instrumentPrefabs.Length];
+                    var instrument = Instantiate(prefab, hit.point, rotation);
                     instrument.transform.SetParent(hit.transform);
 
+                    _instruments.Add(instrument);
                     _sequencer.RegisterReceiver(instrument);
                     _cursor.SetRaycastHitNone();
 

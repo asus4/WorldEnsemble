@@ -4,11 +4,6 @@ namespace AugmentedInstrument
     using System.Linq;
     using UnityEngine;
 
-    public interface ISequencerListener
-    {
-        void Tick(in SequencerTimes times);
-    }
-
     /// <summary>
     /// Global rhythm machine.
     /// </summary>
@@ -23,7 +18,7 @@ namespace AugmentedInstrument
 
         private double _startDspTime;
         private readonly float[] _outputSamples = new float[256];
-        private readonly List<ISequencerListener> _receivers = new();
+        private readonly List<ARInstrument> _instruments = new();
 
         public double BarDuration => _quarterNoteDuration * 4.0;
         public double QuarterNoteDuration => _quarterNoteDuration;
@@ -57,25 +52,25 @@ namespace AugmentedInstrument
                 dspTime: dspTime,
                 loudness: loudness,
                 sixteenthBeat: sixteenthBeat,
-                nextSixteenthBeat: (SixteenthBeat)(1 << ((int)sixteenthBeat + 1) % 16),
                 durationUntilNextSixteenthBeat: sixteenthNoteDuration - (dspTime % sixteenthNoteDuration)
             );
 
             // Send to global shader value
             Shader.SetGlobalVector(_DspTimeID, times.AsVector4);
 
-            foreach (var instrument in _receivers)
+            foreach (var instrument in _instruments)
             {
-                instrument.Tick(times);
+                float distance = Vector3.Distance(
+                    instrument.transform.position, _audioListenerTransform.position);
+                instrument.Tick(times, distance);
             }
 
             // Debug.Log($"bar: {totalBars:F2}, 4: {quarterBeat:F2}, 16: {sixteenthBeat:F2}, next: {nextSixteenthBeat}, delay: {delay:F2}");
         }
 
-        public void RegisterReceiver(ISequencerListener receiver)
+        public void RegisterReceiver(ARInstrument instrument)
         {
-            _receivers.Add(receiver);
+            _instruments.Add(instrument);
         }
-
     }
 }

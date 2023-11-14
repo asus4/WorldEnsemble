@@ -7,21 +7,25 @@ namespace AugmentedInstrument
         public readonly double dspTime;
         public readonly double loudness;
         public readonly double sixteenthBeat;
-        public readonly SixteenthBeat nextSixteenthBeat;
         public readonly double durationUntilNextSixteenthBeat;
+
+
+        public static SixteenthBeat NextSixteenthBeat(int currentSixteenthBeat)
+        {
+            int next = (currentSixteenthBeat + 1) % 16;
+            return (SixteenthBeat)(1 << next);
+        }
 
         public SequencerTimes(
             double dspTime,
             double loudness,
             double sixteenthBeat,
-            SixteenthBeat nextSixteenthBeat,
             double durationUntilNextSixteenthBeat
         )
         {
             this.dspTime = dspTime;
             this.loudness = loudness;
             this.sixteenthBeat = sixteenthBeat;
-            this.nextSixteenthBeat = nextSixteenthBeat;
             this.durationUntilNextSixteenthBeat = durationUntilNextSixteenthBeat;
         }
 

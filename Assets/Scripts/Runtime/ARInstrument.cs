@@ -10,7 +10,7 @@ namespace AugmentedInstrument
     /// An instrument that is instantiated in the AR world.
     /// </summary>
     [RequireComponent(typeof(AudioSource))]
-    public sealed class ARInstrument : MonoBehaviour, ISequencerListener
+    public sealed class ARInstrument : MonoBehaviour
     {
         [SerializeField]
         private SixteenthBeat _beat;
@@ -18,7 +18,7 @@ namespace AugmentedInstrument
         [SerializeField]
         private ParticleSystem _particle;
 
-        public SixteenthBeat BeatMask => _beat;
+        private const double _OFFSET_BEAT_BY_DISTANCE = 2.0; // 2meter
 
         private AudioSource _audioSource;
 
@@ -29,9 +29,13 @@ namespace AugmentedInstrument
             _audioSource = GetComponent<AudioSource>();
         }
 
-        public void Tick(in SequencerTimes times)
+
+        public void Tick(in SequencerTimes times, float distance)
         {
-            int currentSixteenthBeat = (int)times.sixteenthBeat;
+            // Offset beat by distance
+            double offset = distance / _OFFSET_BEAT_BY_DISTANCE;
+            int currentSixteenthBeat = (int)(times.sixteenthBeat + offset) % 16;
+
             if (currentSixteenthBeat == _lastSixteenthBeat)
             {
                 return;
@@ -39,14 +43,15 @@ namespace AugmentedInstrument
 
             _lastSixteenthBeat = currentSixteenthBeat;
 
-            if (!BeatMask.HasFlag(times.nextSixteenthBeat))
+            if (!_beat.HasFlag(SequencerTimes.NextSixteenthBeat(currentSixteenthBeat)))
             {
                 return;
             }
 
             double delay = times.durationUntilNextSixteenthBeat;
+            // Offset speed of the sound in air: 346 m/s
+            delay += distance / 346.0;
 
-            // Debug.Log($"PlaySound: {gameObject.name}, delay: {delay:F2}");
             _audioSource.PlayScheduled(delay);
 
             if (_particle != null)

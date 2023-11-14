@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5311087629731327772}
   - component: {fileID: 5285664139553300732}
   m_Layer: 0
-  m_Name: InstrumentPrefab
+  m_Name: Instrument 00 Kick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

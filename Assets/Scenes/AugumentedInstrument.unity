@@ -391,8 +391,8 @@ MonoBehaviour:
       m_Action: Kick
       m_Flags: 0
     m_Flags: 0
-  _instrumentPrefab: {fileID: 5285664139553300732, guid: 7cf19f3b892f7493e987f3bf41440dde,
-    type: 3}
+  _instrumentPrefabs:
+  - {fileID: 5285664139553300732, guid: 7cf19f3b892f7493e987f3bf41440dde, type: 3}
   _cursorPrefab: {fileID: 2992071860135720732, guid: 86a31f08d672d4398b880e5a8f859fda,
     type: 3}
 --- !u!1 &569233390
