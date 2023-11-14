@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5311087629731327772}
   - component: {fileID: 5285664139553300732}
   m_Layer: 0
-  m_Name: Instrument 00 Kick
+  m_Name: Instrument 01 Kick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1549,9 +1549,9 @@ ParticleSystem:
         atime0: 2884
         atime1: 6522
         atime2: 27243
-        atime3: 29418
-        atime4: 59013
-        atime5: 60166
+        atime3: 28708
+        atime4: 58879
+        atime5: 59767
         atime6: 65535
         atime7: 65535
         m_Mode: 1
@@ -5114,6 +5114,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Axis
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5707b0cb622b47fb942d3453575b5e0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

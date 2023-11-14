@@ -22,11 +22,10 @@ namespace AugmentedInstrument
 
         private int _lastSixteenthBeat = -1;
 
-        private void Start()
+        private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
         }
-
 
         public void Tick(in SequencerTimes times, float distance)
         {
@@ -50,6 +49,11 @@ namespace AugmentedInstrument
             // Offset speed of the sound in air: 346 m/s
             delay += distance / 346.0;
 
+            Trigger(delay);
+        }
+
+        private void Trigger(double delay)
+        {
             _audioSource.PlayScheduled(delay);
 
             if (_particle != null)

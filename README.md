@@ -7,6 +7,7 @@
 ### Assets
 
 - [Space Mono font](https://github.com/googlefonts/spacemono): OFL 1.1
+- [Berlin Riverside HDRI](https://hdri-haven.com/hdri/berlin-riverside): CC0
 
 ### Libraries
 

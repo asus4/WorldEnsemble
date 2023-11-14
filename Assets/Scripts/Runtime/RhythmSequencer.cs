@@ -28,7 +28,7 @@ namespace AugmentedInstrument
         public double DspTime => AudioSettings.dspTime - _startDspTime;
 
         // DSP time for shader
-        private static readonly int _DspTimeID = Shader.PropertyToID("_DspTime");
+        private static readonly int _SequencerTimesID = Shader.PropertyToID("_SequencerTimes");
 
         public void Start(double bpm, AudioListener audioListener)
         {
@@ -47,6 +47,7 @@ namespace AugmentedInstrument
 
             AudioListener.GetOutputData(_outputSamples, 0);
             float loudness = _outputSamples.Sum(x => Mathf.Abs(x)) / _outputSamples.Length;
+            Debug.Log($"loudness: {loudness:F2}");
 
             SequencerTimes times = new(
                 dspTime: dspTime,
@@ -56,7 +57,7 @@ namespace AugmentedInstrument
             );
 
             // Send to global shader value
-            Shader.SetGlobalVector(_DspTimeID, times.AsVector4);
+            Shader.SetGlobalVector(_SequencerTimesID, times.AsVector4);
 
             foreach (var instrument in _instruments)
             {
