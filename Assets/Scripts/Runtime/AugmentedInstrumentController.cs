@@ -104,34 +104,35 @@ namespace AugmentedInstrument
         {
             // Raycast to streetscape geometries
             Ray ray = Camera.main.ScreenPointToRay(_lastPointerPosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
+
+            if (!Physics.Raycast(ray, out RaycastHit hit))
             {
-                Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.blue);
+                // No hit, assuming sky?
+                _cursor.SetRaycastHitNone();
+                return;
+            }
 
-                if (needPlacement)
-                {
-                    // Put a instrument
-                    Quaternion rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-                    var prefab = _instrumentPrefabs[_instruments.Count % _instrumentPrefabs.Length];
-                    var instrument = Instantiate(prefab, hit.point, rotation);
-                    instrument.transform.SetParent(hit.transform);
+            Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.blue);
 
-                    _instruments.Add(instrument);
-                    _sequencer.RegisterReceiver(instrument);
-                    _cursor.SetRaycastHitNone();
+            if (needPlacement)
+            {
+                // Put a instrument
+                Quaternion rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+                var prefab = _instrumentPrefabs[_instruments.Count % _instrumentPrefabs.Length];
+                var instrument = Instantiate(prefab, hit.point, rotation);
+                instrument.transform.SetParent(hit.transform);
+
+                _instruments.Add(instrument);
+                _sequencer.RegisterReceiver(instrument);
+                _cursor.SetRaycastHitNone();
 
                     RunHaptics(0.1f);
 
                     Debug.Log($"Placed: {instrument.name}", instrument);
-                }
-                else
-                {
-                    _cursor.SetRaycastHit(ray, hit);
-                }
             }
             else
             {
-                _cursor.SetRaycastHitNone();
+                _cursor.SetRaycastHit(ray, hit);
             }
         }
 
