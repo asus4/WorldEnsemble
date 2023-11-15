@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.416384, g: 0.55132526, b: 0.8693507, a: 1}
+  m_IndirectSpecularColor: {r: 0.2514064, g: 0.3332761, b: 0.52485967, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -292,10 +292,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dced70479d6aa4e26b29515ce638ab66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  streetscapeMaterial: {fileID: 2100000, guid: 775ce3c1866ce4692b5d2cd9c1848a39, type: 2}
+  streetscapeGeometryPrefab: {fileID: 4224855648116327507, guid: d0586bac328c0415aabe9f1433675cc8,
+    type: 3}
   calculateNormal: 1
   calculateTangent: 1
-  useCollider: 1
 --- !u!114 &384014294
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ namespace AugmentedInstrument
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
+    using UnityEngine.Assertions;
 
     /// <summary>
     /// An instrument that is instantiated in the AR world.
@@ -21,10 +22,23 @@ namespace AugmentedInstrument
         private AudioSource _audioSource;
 
         private int _lastSixteenthBeat = -1;
+        private StreetscapeGeometryInstrument _parentStreetscape;
 
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
+        }
+
+        private void Start()
+        {
+            _parentStreetscape = GetComponentInParent<StreetscapeGeometryInstrument>();
+            Assert.IsNotNull(_parentStreetscape);
+        }
+
+        private void OnDestroy()
+        {
+            _audioSource = null;
+            _parentStreetscape = null;
         }
 
         public void Tick(in SequencerTimes times, float distance)
@@ -55,6 +69,11 @@ namespace AugmentedInstrument
         private void Trigger(double delay)
         {
             _audioSource.PlayScheduled(delay);
+
+            if (_parentStreetscape != null)
+            {
+                _parentStreetscape.Trigger(this, delay);
+            }
 
             if (_particle != null)
             {

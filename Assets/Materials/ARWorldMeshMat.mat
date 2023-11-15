@@ -97,6 +97,8 @@ Material:
     - _Glossiness: 0.5
     - _GlossinessSource: 0
     - _GlossyReflections: 1
+    - _InstrumentLength: 20
+    - _InstrumentTrigger: 0
     - _InvLineMeter: 0
     - _LinePeriodicScale: 0.05
     - _LineWidth: 0.005
@@ -125,6 +127,8 @@ Material:
     - _BaseColor: {r: 0, g: 0.7019608, b: 0, a: 1}
     - _Color: {r: 0, g: 0.7019608, b: 0, a: 0.34117648}
     - _EmissionColor: {r: 0, g: 0.48235294, b: 0, a: 1}
+    - _InstrumentNormal: {r: 0, g: 0, b: 0, a: 0}
+    - _InstrumentPosition: {r: 0, g: 0, b: 0, a: 0}
     - _LineColor: {r: 2, g: 1.375478, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []

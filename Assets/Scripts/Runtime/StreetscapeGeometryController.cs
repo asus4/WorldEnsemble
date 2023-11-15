@@ -38,21 +38,17 @@ namespace AugmentedInstrument
     /// </summary>
     public sealed class StreetscapeGeometryController : MonoBehaviour
     {
-        private AREarthManager _earthManager;
-        private ARStreetscapeGeometryManager _streetScapeGeometryManager;
-
         [SerializeField]
-        private Material streetscapeMaterial;
+        private MeshFilter streetscapeGeometryPrefab;
 
         [SerializeField]
         private bool calculateNormal = false;
         [SerializeField]
         private bool calculateTangent = false;
-        [SerializeField]
-        private bool useCollider = false;
-
 
         private readonly Dictionary<TrackableId, GameObject> _streetScapeGeometries = new();
+        private AREarthManager _earthManager;
+        private ARStreetscapeGeometryManager _streetScapeGeometryManager;
 
         private void Awake()
         {
@@ -146,17 +142,14 @@ namespace AugmentedInstrument
                 mesh.RecalculateTangents();
             }
 
-            go = new GameObject($"StreetscapeGeometryMesh");
-            go.AddComponent<MeshFilter>().sharedMesh = mesh;
+            var meshFilter = Instantiate(streetscapeGeometryPrefab);
+            go = meshFilter.gameObject;
 
-            if (useCollider)
+            meshFilter.sharedMesh = mesh;
+            if (go.TryGetComponent(out MeshCollider collider))
             {
-                go.AddComponent<MeshCollider>().sharedMesh = mesh;
+                collider.sharedMesh = mesh;
             }
-
-            // Set materials
-            var renderer = go.AddComponent<MeshRenderer>();
-            renderer.sharedMaterial = streetscapeMaterial;
 
             go.transform.SetParent(transform, false);
             go.transform.SetPositionAndRotation(pose.position, pose.rotation);
