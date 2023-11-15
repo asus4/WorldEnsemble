@@ -4,6 +4,7 @@ namespace AugmentedInstrument
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
+    using UnityEngine.Events;
     using UnityEngine.InputSystem;
 
     /// <summary>
@@ -11,6 +12,10 @@ namespace AugmentedInstrument
     /// </summary>
     public sealed class AugmentedInstrumentController : MonoBehaviour
     {
+        [System.Serializable]
+        public sealed class TapPointEvent : UnityEvent<Vector3> { }
+
+
         [SerializeField]
         private AppSettings _settings;
 
@@ -27,6 +32,9 @@ namespace AugmentedInstrument
         private ARInstrument[] _instrumentPrefabs;
         [SerializeField]
         private RaycastCursor _cursorPrefab;
+
+        [Header("Events")]
+        public TapPointEvent onTapAir;
 
         private Vector2 _lastPointerPosition;
         private RaycastCursor _cursor;
@@ -111,7 +119,7 @@ namespace AugmentedInstrument
                 _cursor.SetRaycastHitNone();
                 if (idTouchEnd)
                 {
-                    OnTapEndNothing();
+                    OnTapEndNothing(ray);
                 }
                 return;
             }
@@ -134,7 +142,8 @@ namespace AugmentedInstrument
         private void OnKick(InputAction.CallbackContext ctx)
         {
             // Keep this for testing on Editor
-            OnTapEndNothing();
+            Ray ray = Camera.main.ScreenPointToRay(_lastPointerPosition);
+            OnTapEndNothing(ray);
         }
 
         private void AddInstrument(ref RaycastHit hit)
@@ -163,9 +172,14 @@ namespace AugmentedInstrument
             InputSystem.PauseHaptics();
         }
 
-        private void OnTapEndNothing()
+        private void OnTapEndNothing(Ray ray)
         {
+            const float distance = 30f;
+            Vector3 point = ray.GetPoint(distance);
+            onTapAir.Invoke(point);
+
             Debug.Log($"OnTapEndNothing");
+
         }
     }
 }
