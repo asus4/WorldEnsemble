@@ -66,7 +66,7 @@ namespace AugmentedInstrument
             Trigger(delay);
         }
 
-        private void Trigger(double delay)
+        public void Trigger(double delay)
         {
             _audioSource.PlayScheduled(delay);
 

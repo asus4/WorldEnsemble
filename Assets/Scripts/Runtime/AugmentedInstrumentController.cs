@@ -161,6 +161,7 @@ namespace AugmentedInstrument
             var prefab = _instrumentPrefabs[_instruments.Count % _instrumentPrefabs.Length];
             var instrument = Instantiate(prefab, hit.point, rotation);
             instrument.transform.SetParent(hit.transform);
+            instrument.Trigger(0.1);
 
             _instruments.Add(instrument);
             _sequencer.RegisterReceiver(instrument);

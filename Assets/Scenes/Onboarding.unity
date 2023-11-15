@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.9635109, g: 0.82607126, b: 0.49314713, a: 1}
+  m_IndirectSpecularColor: {r: 0.10703822, g: 0.09177303, b: 0.054787796, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -315,7 +315,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Unmute\nand \nput on headphones."
+  m_text: 'Unmute.
+
+    Put on headset.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8ce26fe6f2fa645c2863d681ec1c8d07, type: 2}
   m_sharedMaterial: {fileID: 3957074780688391976, guid: 8ce26fe6f2fa645c2863d681ec1c8d07,
@@ -1197,7 +1199,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -120}
+  m_AnchoredPosition: {x: 0, y: -112}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1137782741
@@ -2358,8 +2360,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0878cad3b214a10ab8915827d7f7173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_persistent: 1
-  m_sceneSelectionGroups: []
 --- !u!4 &1705544540
 Transform:
   m_ObjectHideFlags: 1
@@ -3047,7 +3047,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Did you hear the sound?
+  m_text: Do you hear the sound?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8ce26fe6f2fa645c2863d681ec1c8d07, type: 2}
   m_sharedMaterial: {fileID: 3957074780688391976, guid: 8ce26fe6f2fa645c2863d681ec1c8d07,
