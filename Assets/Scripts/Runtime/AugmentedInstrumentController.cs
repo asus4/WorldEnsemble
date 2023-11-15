@@ -3,6 +3,7 @@ namespace AugmentedInstrument
 {
     using System.Collections;
     using System.Collections.Generic;
+    using MemoryPack.Internal;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.InputSystem;
@@ -78,27 +79,31 @@ namespace AugmentedInstrument
             _kickAction.performed -= OnKick;
         }
 
-        private void OnEnable()
-        {
-            foreach (InputAction action in AllActions)
-            {
-                action.Enable();
-            }
-        }
-
         private void OnDisable()
         {
-            foreach (InputAction action in AllActions)
-            {
-                action.Disable();
-            }
+            SetInputEnable(false);
         }
-
 
         private void Update()
         {
             _sequencer.Tick();
+        }
 
+        // Called from UI
+        [Preserve]
+        public void SetInputEnable(bool isEnable)
+        {
+            foreach (InputAction action in AllActions)
+            {
+                if (isEnable)
+                {
+                    action.Enable();
+                }
+                else
+                {
+                    action.Disable();
+                }
+            }
         }
 
         private void OnTouchDrag(InputAction.CallbackContext ctx)

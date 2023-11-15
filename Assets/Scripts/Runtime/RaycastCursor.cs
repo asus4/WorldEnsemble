@@ -10,6 +10,9 @@ namespace AugmentedInstrument
         [SerializeField]
         private AudioSource _raycastHitAudio;
 
+        [SerializeField]
+        private AudioSource _raycastNoneAudio;
+
         private void Awake()
         {
             SetRaycastHitNone();
