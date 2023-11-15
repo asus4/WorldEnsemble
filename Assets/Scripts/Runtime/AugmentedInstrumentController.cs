@@ -36,10 +36,11 @@ namespace AugmentedInstrument
         [Header("Events")]
         public TapPointEvent onTapAir;
 
+        private readonly List<ARInstrument> _instruments = new();
         private Vector2 _lastPointerPosition;
         private RaycastCursor _cursor;
-        private readonly RhythmSequencer _sequencer = RhythmSequencer.Instance;
-        private readonly List<ARInstrument> _instruments = new();
+        private RhythmSequencer _sequencer;
+
 
         private InputAction[] AllActions => new InputAction[]
         {
@@ -64,11 +65,14 @@ namespace AugmentedInstrument
         private void Start()
         {
             AudioListener audioListener = FindObjectOfType<AudioListener>();
+            _sequencer = new RhythmSequencer();
             _sequencer.Start(_settings.BPM, audioListener);
         }
 
         private void OnDestroy()
         {
+            _sequencer?.Dispose();
+
             _touchDragAction.performed -= OnTouchDrag;
             _touchDecideAction.performed -= OnTouchDecide;
             _kickAction.performed -= OnKick;

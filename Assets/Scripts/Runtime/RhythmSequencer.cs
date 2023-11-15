@@ -7,7 +7,7 @@ namespace AugmentedInstrument
     /// <summary>
     /// Global rhythm machine.
     /// </summary>
-    public sealed class RhythmSequencer
+    public sealed class RhythmSequencer : System.IDisposable
     {
         private static class LoudnessMeter
         {
@@ -49,8 +49,6 @@ namespace AugmentedInstrument
             }
         }
 
-        public static RhythmSequencer Instance { get; } = new RhythmSequencer();
-
         private double _quarterNoteDuration;
 
         private Transform _audioListenerTransform;
@@ -73,6 +71,11 @@ namespace AugmentedInstrument
 
             _startDspTime = AudioSettings.dspTime;
             _quarterNoteDuration = 60.0 / bpm;
+        }
+
+        public void Dispose()
+        {
+            _instruments.Clear();
         }
 
         public void Tick()
