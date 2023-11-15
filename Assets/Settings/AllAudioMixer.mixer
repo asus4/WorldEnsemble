@@ -38,7 +38,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Rythm
+  m_Name: Rhythm
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: a650702288e714c7da22cbdfcbfdb110
   m_Children: []
