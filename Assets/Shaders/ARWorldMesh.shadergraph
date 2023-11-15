@@ -4128,7 +4128,7 @@
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.GroupData",
     "m_ObjectId": "e4cf720f05ff495f9743e03110de650f",
-    "m_Title": "Light at instrument trigger",
+    "m_Title": "Lighting around the instrument while triggered",
     "m_Position": {
         "x": -1653.1739501953125,
         "y": 724.2610473632813

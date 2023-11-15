@@ -100,7 +100,7 @@ namespace AugmentedInstrument
             Raycast(true);
         }
 
-        private void Raycast(bool needPlacement)
+        private void Raycast(bool idTouchEnd)
         {
             // Raycast to streetscape geometries
             Ray ray = Camera.main.ScreenPointToRay(_lastPointerPosition);
@@ -109,26 +109,21 @@ namespace AugmentedInstrument
             {
                 // No hit, assuming sky?
                 _cursor.SetRaycastHitNone();
+                if (idTouchEnd)
+                {
+                    OnTapEndNothing();
+                }
                 return;
             }
+            // else, found a RaycastHit
 
             Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.blue);
 
-            if (needPlacement)
+            if (idTouchEnd)
             {
-                // Put a instrument
-                Quaternion rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-                var prefab = _instrumentPrefabs[_instruments.Count % _instrumentPrefabs.Length];
-                var instrument = Instantiate(prefab, hit.point, rotation);
-                instrument.transform.SetParent(hit.transform);
-
-                _instruments.Add(instrument);
-                _sequencer.RegisterReceiver(instrument);
                 _cursor.SetRaycastHitNone();
-
-                    RunHaptics(0.1f);
-
-                    Debug.Log($"Placed: {instrument.name}", instrument);
+                AddInstrument(ref hit);
+                RunHaptics();
             }
             else
             {
@@ -139,12 +134,26 @@ namespace AugmentedInstrument
         private void OnKick(InputAction.CallbackContext ctx)
         {
             // Keep this for testing on Editor
-            Debug.Log($"OnKick: {ctx}");
+            OnTapEndNothing();
         }
 
-        private void RunHaptics(float seconds)
+        private void AddInstrument(ref RaycastHit hit)
         {
-            StartCoroutine(RunHapticsInternal(seconds));
+            Quaternion rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+            var prefab = _instrumentPrefabs[_instruments.Count % _instrumentPrefabs.Length];
+            var instrument = Instantiate(prefab, hit.point, rotation);
+            instrument.transform.SetParent(hit.transform);
+
+            _instruments.Add(instrument);
+            _sequencer.RegisterReceiver(instrument);
+            Debug.Log($"Placed: {instrument.name}", instrument);
+        }
+
+        private void RunHaptics()
+        {
+            Handheld.Vibrate();
+            // InputSystem haptics doesn't work?
+            // StartCoroutine(RunHapticsInternal(seconds));
         }
 
         private static IEnumerator RunHapticsInternal(float seconds)
@@ -154,5 +163,9 @@ namespace AugmentedInstrument
             InputSystem.PauseHaptics();
         }
 
+        private void OnTapEndNothing()
+        {
+            Debug.Log($"OnTapEndNothing");
+        }
     }
 }
