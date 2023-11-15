@@ -2,6 +2,9 @@ namespace AugmentedInstrument
 {
     using UnityEngine;
 
+    /// <summary>
+    /// Hide object in non-development builds.
+    /// </summary>
     public sealed class DevelopmentOnlyObject : MonoBehaviour
     {
         private void Start()

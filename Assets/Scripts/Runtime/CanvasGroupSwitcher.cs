@@ -4,6 +4,9 @@ namespace AugmentedInstrument
     using UnityEngine;
     using UnityEngine.Scripting;
 
+    /// <summary>
+    /// Switches between canvas groups with a fade animation.
+    /// </summary>
     public sealed class CanvasGroupSwitcher : MonoBehaviour
     {
         [SerializeField]

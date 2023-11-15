@@ -4,6 +4,9 @@ namespace AugmentedInstrument
     using UnityEngine.SceneManagement;
     using UnityEngine.UI;
 
+    /// <summary>
+    /// Open a scene when a button is tapped.
+    /// </summary>
     [RequireComponent(typeof(Button))]
     public sealed class OpenSceneButton : MonoBehaviour
     {
