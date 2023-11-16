@@ -9,7 +9,7 @@ namespace WorldInstrument
     /// An instrument that is instantiated in the AR world.
     /// </summary>
     [RequireComponent(typeof(AudioSource))]
-    public sealed class ARInstrument : MonoBehaviour
+    public sealed class WorldInstrument : MonoBehaviour
     {
         [SerializeField]
         private SixteenthBeat _beat;

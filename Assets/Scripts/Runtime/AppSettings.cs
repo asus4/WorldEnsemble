@@ -3,7 +3,7 @@ namespace WorldInstrument
     using UnityEngine;
 
     /// <summary>
-    /// Global settings for the Augmented Instrument Project!
+    /// Global settings for the app.
     /// </summary>
     [CreateAssetMenu(fileName = "AppSettings", menuName = "ScriptableObjects/AppSettings")]
     public class AppSettings : ScriptableObject

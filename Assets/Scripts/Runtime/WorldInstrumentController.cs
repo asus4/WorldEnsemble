@@ -8,9 +8,9 @@ namespace WorldInstrument
     using UnityEngine.Scripting;
 
     /// <summary>
-    /// Entry point for the Augmented Instrument Project!
+    /// Entry point for the World Instrument Project!
     /// </summary>
-    public sealed class AugmentedInstrumentController : MonoBehaviour
+    public sealed class WorldInstrumentController : MonoBehaviour
     {
         [System.Serializable]
         public sealed class TapPointEvent : UnityEvent<Vector3> { }
@@ -29,7 +29,7 @@ namespace WorldInstrument
 
         [Header("Prefabs")]
         [SerializeField]
-        private ARInstrument[] _instrumentPrefabs;
+        private WorldInstrument[] _instrumentPrefabs;
 
         [Header("Scene References")]
         [SerializeField]
@@ -39,7 +39,7 @@ namespace WorldInstrument
         [Header("Events")]
         public TapPointEvent onTapAir;
 
-        private readonly List<ARInstrument> _instruments = new();
+        private readonly List<WorldInstrument> _instruments = new();
         private Vector2 _lastPointerPosition;
         private RhythmSequencer _sequencer;
 
@@ -169,10 +169,10 @@ namespace WorldInstrument
         private void RunHaptics()
         {
             Handheld.Vibrate();
+
             // InputSystem haptics doesn't work?
             // InputSystem.ResumeHaptics();
             // InputSystem.PauseHaptics();
-            // StartCoroutine(RunHapticsInternal(seconds));
         }
 
         private void OnTapEndNothing(Ray ray)

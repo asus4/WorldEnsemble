@@ -55,7 +55,7 @@ namespace WorldInstrument
 
         private double _startDspTime;
 
-        private readonly List<ARInstrument> _instruments = new();
+        private readonly List<WorldInstrument> _instruments = new();
 
 
         public double DspTime => AudioSettings.dspTime - _startDspTime;
@@ -106,7 +106,7 @@ namespace WorldInstrument
             // Debug.Log($"bar: {totalBars:F2}, 4: {quarterBeat:F2}, 16: {sixteenthBeat:F2}, next: {nextSixteenthBeat}, delay: {delay:F2}");
         }
 
-        public void RegisterReceiver(ARInstrument instrument)
+        public void RegisterReceiver(WorldInstrument instrument)
         {
             _instruments.Add(instrument);
         }

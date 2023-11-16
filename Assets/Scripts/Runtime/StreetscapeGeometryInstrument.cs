@@ -31,7 +31,7 @@ namespace WorldInstrument
             _mpb.Clear();
         }
 
-        public void Trigger(ARInstrument instrument, double delay)
+        public void Trigger(WorldInstrument instrument, double delay)
         {
             if (_coroutine != null)
             {
@@ -40,7 +40,7 @@ namespace WorldInstrument
             _coroutine = StartCoroutine(TriggerAsync(instrument, (float)delay));
         }
 
-        private IEnumerator TriggerAsync(ARInstrument instrument, float delay)
+        private IEnumerator TriggerAsync(WorldInstrument instrument, float delay)
         {
             yield return new WaitForSeconds(delay);
 

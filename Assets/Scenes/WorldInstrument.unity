@@ -480,7 +480,7 @@ GameObject:
   - component: {fileID: 384014293}
   - component: {fileID: 384014294}
   m_Layer: 0
-  m_Name: AugmentedInstrumentController
+  m_Name: World Instrument Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
