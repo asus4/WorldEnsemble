@@ -161,7 +161,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.kokiibukuro.worldinstrument
     Standalone: com.koki-ibukuro.world-instrument
-    iPhone: com.koki-ibukuro.world-instrument
+    iPhone: com.koki-ibukuro.worldinstrument
   buildNumber:
     Standalone: 0
     VisionOS: 0
