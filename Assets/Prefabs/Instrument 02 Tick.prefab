@@ -144,7 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a27897cc9ae41aeb9faddc19ffcfc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _settings: {fileID: 11400000, guid: 80153d4f9a0b24d128de5c208dab0bbc, type: 2}
   _beat: 16
+  _audioSource: {fileID: 5311087629731327772}
   _particle: {fileID: 3019049254466970532}
 --- !u!1 &5680953151260819956
 GameObject:

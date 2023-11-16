@@ -9,5 +9,6 @@ namespace WorldInstrument
     public class AppSettings : ScriptableObject
     {
         public int BPM = 90;
+        public double Offset16BeatByDistanceMeter = 2.0;
     }
 }

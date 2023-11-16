@@ -479,6 +479,7 @@ GameObject:
   - component: {fileID: 384014292}
   - component: {fileID: 384014293}
   - component: {fileID: 384014294}
+  - component: {fileID: 384014295}
   m_Layer: 0
   m_Name: World Instrument Controller
   m_TagString: Untagged
@@ -622,21 +623,9 @@ MonoBehaviour:
   onTapAir:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 396691361}
-        m_TargetAssemblyTypeName: UnityEngine.Transform, UnityEngine
-        m_MethodName: set_position
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 396691360}
-        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
-        m_MethodName: Play
+      - m_Target: {fileID: 384014295}
+        m_TargetAssemblyTypeName: WorldInstrument.WorldEffectSwitcher, Assembly-CSharp
+        m_MethodName: NextEffect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -646,12 +635,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!198 &396691360 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2505022429749918745, guid: bf9cb170dea9944bbbbd260062c7674d,
-    type: 3}
-  m_PrefabInstance: {fileID: 5918798164953245493}
+--- !u!114 &384014295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384014290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8892dd58920054ca7865606eb2fe137c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _postEffectVolume: {fileID: 1848301128}
+  _effects:
+  - volumeProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
+    mixerSnapshot: {fileID: 24500006, guid: 871eaeaf614e44b7d8247d4000ee46db, type: 2}
+  - volumeProfile: {fileID: 11400000, guid: bf48bfbab5322477dbeaf34e8cab639a, type: 2}
+    mixerSnapshot: {fileID: -7190444651608733731, guid: 871eaeaf614e44b7d8247d4000ee46db,
+      type: 2}
 --- !u!4 &396691361 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6872740582902893043, guid: bf9cb170dea9944bbbbd260062c7674d,
@@ -2164,7 +2166,7 @@ GameObject:
   - component: {fileID: 1848301129}
   - component: {fileID: 1848301128}
   m_Layer: 0
-  m_Name: PostEffect
+  m_Name: PostEffectVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

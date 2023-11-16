@@ -1,3 +1,4 @@
+
 namespace WorldInstrument
 {
     using System.Collections;
@@ -6,28 +7,25 @@ namespace WorldInstrument
     using UnityEngine.Assertions;
 
     /// <summary>
-    /// An instrument that is instantiated in the AR world.
+    /// An instrument located in the AR world.
     /// </summary>
-    [RequireComponent(typeof(AudioSource))]
     public sealed class WorldInstrument : MonoBehaviour
     {
+        [SerializeField]
+        private AppSettings _settings;
+
         [SerializeField]
         private SixteenthBeat _beat;
 
         [SerializeField]
-        private ParticleSystem _particle;
-
-        private const double _OFFSET_BEAT_BY_DISTANCE = 2.0; // 2meter
-
         private AudioSource _audioSource;
+
+        [SerializeField]
+        private ParticleSystem _particle;
 
         private int _lastSixteenthBeat = -1;
         private StreetscapeGeometryInstrument _parentStreetscape;
 
-        private void Awake()
-        {
-            _audioSource = GetComponent<AudioSource>();
-        }
 
         private void Start()
         {
@@ -44,7 +42,7 @@ namespace WorldInstrument
         public void Tick(in SequencerTimes times, float distance)
         {
             // Offset beat by distance
-            double offset = distance / _OFFSET_BEAT_BY_DISTANCE;
+            double offset = distance / _settings.Offset16BeatByDistanceMeter;
             int currentSixteenthBeat = (int)(times.sixteenthBeat + offset) % 16;
 
             if (currentSixteenthBeat == _lastSixteenthBeat)
