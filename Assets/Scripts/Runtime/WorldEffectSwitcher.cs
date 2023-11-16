@@ -21,7 +21,12 @@ namespace WorldInstrument
         private Volume _postEffectVolume;
 
         [SerializeField]
+        [Range(0.0f, 8.0f)]
+        private float _transitionDuration = 2f;
+
+        [SerializeField]
         private EffectSet[] _effects;
+
 
         private int _currentEffectIndex = 0;
 
@@ -39,7 +44,7 @@ namespace WorldInstrument
         public void SwitchEffect(EffectSet effect)
         {
             _postEffectVolume.profile = effect.volumeProfile;
-            effect.mixerSnapshot.TransitionTo(0.5f);
+            effect.mixerSnapshot.TransitionTo(_transitionDuration);
         }
     }
 }

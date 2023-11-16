@@ -20,5 +20,6 @@
 
 ### Libraries
 
+- [ARCore Extensions](https://github.com/google-ar/arcore-unity-extensions): Apache 2.0 and [ARCore Additional Terms of Service](https://developers.google.com/ar/develop/terms)
 - [AR Foundation Replay](https://github.com/asus4/ARFoundationReplay): Unlicense
   - [MemoryPack](https://github.com/Cysharp/MemoryPack): MIT

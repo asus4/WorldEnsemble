@@ -8,7 +8,6 @@ namespace WorldInstrument
     /// </summary>
     public sealed class RhythmSequencer : System.IDisposable
     {
-
         private double _quarterNoteDuration;
 
         private Transform _audioListenerTransform;
@@ -30,6 +29,15 @@ namespace WorldInstrument
 
             _startDspTime = AudioSettings.dspTime;
             _quarterNoteDuration = 60.0 / bpm;
+
+            // Output debug info
+            // Delay effect time should be matched with these values
+            var sb = new System.Text.StringBuilder();
+            sb.AppendLine("Start Rhythm Sequencer:");
+            sb.AppendLine($"- BPM: {bpm}");
+            sb.AppendLine($"- 1/4 Note Duration: {_quarterNoteDuration} sec, {_quarterNoteDuration * 1000} ms");
+            sb.AppendLine($"- 1/16 Note Duration: {SixteenthNoteDuration} sec, {SixteenthNoteDuration * 1000} ms");
+            Debug.Log(sb.ToString());
         }
 
         public void Dispose()

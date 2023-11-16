@@ -1,8 +1,6 @@
 
 namespace WorldInstrument
 {
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.Assertions;
 
@@ -42,7 +40,7 @@ namespace WorldInstrument
         public void Tick(in SequencerTimes times, float distance)
         {
             // Offset beat by distance
-            double offset = distance / _settings.Offset16BeatByDistanceMeter;
+            double offset = distance / _settings.offset16BeatByDistanceMeter;
             int currentSixteenthBeat = (int)(times.sixteenthBeat + offset) % 16;
 
             if (currentSixteenthBeat == _lastSixteenthBeat)
@@ -58,8 +56,7 @@ namespace WorldInstrument
             }
 
             double delay = times.durationUntilNextSixteenthBeat;
-            // Offset speed of the sound in air: 346 m/s
-            delay += distance / 346.0;
+            delay += distance / _settings.soundSpeedInAir;
 
             Trigger(delay);
         }

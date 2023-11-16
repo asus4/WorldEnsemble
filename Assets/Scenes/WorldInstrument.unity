@@ -648,11 +648,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _postEffectVolume: {fileID: 1848301128}
+  _transitionDuration: 2
   _effects:
   - volumeProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
     mixerSnapshot: {fileID: 24500006, guid: 871eaeaf614e44b7d8247d4000ee46db, type: 2}
   - volumeProfile: {fileID: 11400000, guid: bf48bfbab5322477dbeaf34e8cab639a, type: 2}
     mixerSnapshot: {fileID: -7190444651608733731, guid: 871eaeaf614e44b7d8247d4000ee46db,
+      type: 2}
+  - volumeProfile: {fileID: 11400000, guid: 9155793cf394b4a358055903af9ff1ff, type: 2}
+    mixerSnapshot: {fileID: 7404657922527007435, guid: 871eaeaf614e44b7d8247d4000ee46db,
       type: 2}
 --- !u!4 &396691361 stripped
 Transform:
