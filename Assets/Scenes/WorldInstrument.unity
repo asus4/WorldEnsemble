@@ -648,7 +648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _postEffectVolume: {fileID: 1848301128}
-  _transitionDuration: 2
+  _transitionDuration: 0.8
   _effects:
   - volumeProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
     mixerSnapshot: {fileID: 24500006, guid: 871eaeaf614e44b7d8247d4000ee46db, type: 2}
