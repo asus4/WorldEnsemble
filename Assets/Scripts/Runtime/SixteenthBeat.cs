@@ -1,4 +1,4 @@
-namespace AugmentedInstrument
+namespace WorldInstrument
 {
     [System.Flags]
     public enum SixteenthBeat

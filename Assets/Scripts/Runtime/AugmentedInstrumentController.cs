@@ -1,5 +1,5 @@
 
-namespace AugmentedInstrument
+namespace WorldInstrument
 {
     using System.Collections.Generic;
     using UnityEngine;
@@ -30,15 +30,17 @@ namespace AugmentedInstrument
         [Header("Prefabs")]
         [SerializeField]
         private ARInstrument[] _instrumentPrefabs;
+
+        [Header("Scene References")]
         [SerializeField]
-        private RaycastCursor _cursorPrefab;
+        private RaycastCursor _cursor;
+
 
         [Header("Events")]
         public TapPointEvent onTapAir;
 
         private readonly List<ARInstrument> _instruments = new();
         private Vector2 _lastPointerPosition;
-        private RaycastCursor _cursor;
         private RhythmSequencer _sequencer;
 
 
@@ -57,9 +59,6 @@ namespace AugmentedInstrument
             _touchDragAction.performed += OnTouchDrag;
             _touchDecideAction.performed += OnTouchDecide;
             _kickAction.performed += OnKick;
-
-            _cursor = Instantiate(_cursorPrefab);
-            _cursor.transform.SetParent(transform);
         }
 
         private void Start()

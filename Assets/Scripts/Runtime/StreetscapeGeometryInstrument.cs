@@ -1,4 +1,4 @@
-namespace AugmentedInstrument
+namespace WorldInstrument
 {
     using System.Collections;
     using UnityEngine;

@@ -1,4 +1,4 @@
-namespace AugmentedInstrument
+namespace WorldInstrument
 {
     using UnityEngine;
     using UnityEngine.SceneManagement;

@@ -19,7 +19,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace AugmentedInstrument
+namespace WorldInstrument
 {
     using System.Collections;
     using System.Collections.Generic;

@@ -1,4 +1,4 @@
-namespace ARFoundationReplay
+namespace WorldInstrument
 {
     using UnityEngine;
 
