@@ -108,7 +108,7 @@ Material:
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _ColorBlend: 0.247
-    - _ColorOverlayMix: 0.173
+    - _ColorOverlayMix: 0.546
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -116,18 +116,18 @@ Material:
     - _DstBlend: 10
     - _DstBlendAlpha: 10
     - _EnvironmentReflections: 1
-    - _FrenselPoewr: 1.44
+    - _FrenselPoewr: 2.45
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _LoudnessMultiplier: 0
+    - _LoudnessMultiplier: 0.9
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RefractiveIndex: 1.33
+    - _RefractiveIndex: 2.96
     - _SampleGI: 0
     - _ScreenGlitchScale: 0.05
     - _Smoothness: 0.5

@@ -89,7 +89,7 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ColorMultiplier: 1.37
+    - _ColorMultiplier: 3
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -102,7 +102,7 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _OverlayBlend: 0.2
+    - _OverlayBlend: 1
     - _Parallax: 0.005
     - _QueueControl: 1
     - _QueueOffset: 0

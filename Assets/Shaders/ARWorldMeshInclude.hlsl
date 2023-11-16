@@ -10,7 +10,7 @@ void PeriodicLine_float(
     out float Alpha)
 {
     float distance = length(Pos - CameraPos);
-    float time = DspTime / PeriodicScale;
+    float time = DspTime / PeriodicScale * 0.25;
     float edge = frac((distance - time) * PeriodicScale);
 
     const float k = 0.5;
