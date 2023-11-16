@@ -74,6 +74,16 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
+
+########################################
+# Specific for World Instrument Project
+########################################
+
 *.mp4
 # Ignore my API keys
 ProjectSettings/ARCoreExtensionsProjectSettings.json
+# Ignore ARCore extensions library
+Assets/Plugins/Android/*.aar
+Assets/Plugins/Android/*.aar.meta
+Assets/Plugins/Android/*.jar
+Assets/Plugins/Android/*.jar.meta
