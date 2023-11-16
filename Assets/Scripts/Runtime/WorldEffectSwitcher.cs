@@ -3,6 +3,7 @@ namespace WorldInstrument
     using UnityEngine;
     using UnityEngine.Audio;
     using UnityEngine.Rendering;
+    using UnityEngine.Scripting;
 
     /// <summary>
     /// Switch both VISUAL and AUDIO effect
@@ -24,6 +25,8 @@ namespace WorldInstrument
 
         private int _currentEffectIndex = 0;
 
+        // Called from event
+        [Preserve]
         public void NextEffect()
         {
             // Next effect
