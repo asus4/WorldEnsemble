@@ -1,12 +1,11 @@
 
 namespace AugmentedInstrument
 {
-    using System.Collections;
     using System.Collections.Generic;
-    using MemoryPack.Internal;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.InputSystem;
+    using UnityEngine.Scripting;
 
     /// <summary>
     /// Entry point for the Augmented Instrument Project!
@@ -172,14 +171,9 @@ namespace AugmentedInstrument
         {
             Handheld.Vibrate();
             // InputSystem haptics doesn't work?
+            // InputSystem.ResumeHaptics();
+            // InputSystem.PauseHaptics();
             // StartCoroutine(RunHapticsInternal(seconds));
-        }
-
-        private static IEnumerator RunHapticsInternal(float seconds)
-        {
-            InputSystem.ResumeHaptics();
-            yield return new WaitForSeconds(seconds);
-            InputSystem.PauseHaptics();
         }
 
         private void OnTapEndNothing(Ray ray)
@@ -189,7 +183,6 @@ namespace AugmentedInstrument
             onTapAir.Invoke(point);
 
             Debug.Log($"OnTapEndNothing");
-
         }
     }
 }
