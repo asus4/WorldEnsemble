@@ -8,23 +8,25 @@
       "hash": "9aa51ce1e8da24e27053bf2448c127c4263c2096"
     },
     "com.github.asus4.arfoundationreplay": {
-      "version": "file:../../ARFoundationReplay/Packages/com.github.asus4.arfoundationreplay",
+      "version": "https://github.com/asus4/ARFoundationReplay.git?path=Packages/com.github.asus4.arfoundationreplay#v0.1.0",
       "depth": 0,
-      "source": "local",
+      "source": "git",
       "dependencies": {
         "com.unity.xr.arfoundation": "5.1.0",
         "com.cysharp.memorypack": "1.9.16"
-      }
+      },
+      "hash": "9d4f4418a3683e25c885f973ef11a21aafddc9b0"
     },
     "com.google.ar.core.arfoundation.extensions": {
-      "version": "file:../../arcore-unity-extensions",
+      "version": "https://github.com/asus4/arcore-unity-extensions.git",
       "depth": 0,
-      "source": "local",
+      "source": "git",
       "dependencies": {
         "com.unity.xr.arfoundation": "4.1.5",
         "com.unity.xr.arcore": "4.1.5",
         "com.unity.xr.arkit": "4.1.5"
-      }
+      },
+      "hash": "7d4564a5c774338c17c145e16df57958f8f8e3ae"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
