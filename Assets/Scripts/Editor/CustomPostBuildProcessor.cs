@@ -1,5 +1,6 @@
 namespace WorldInstrument
 {
+    using System.IO;
     using UnityEditor.Build;
     using UnityEditor.Build.Reporting;
 #if UNITY_IOS
@@ -8,15 +9,26 @@ namespace WorldInstrument
 
     public class CustomPostBuildProcessor : IPostprocessBuildWithReport
     {
-        public int callbackOrder { get { return 0; } }
+        public int callbackOrder => 0;
+
         public void OnPostprocessBuild(BuildReport report)
         {
 #if UNITY_IOS
-            // Add -ld_classic to OTHER_LDFLAGS to avoid Xcode 15 build error
+            string projectPath = PBXProject.GetPBXProjectPath(report.summary.outputPath);
+            ModifyPBXProject(projectPath);
+            ModifyInfoPlist(projectPath);
+#endif // UNITY_IOS
+        }
+
+#if UNITY_IOS
+        private static void ModifyPBXProject(string projectPath)
+        {
+            // Workaround for Xcode 15 issue:
+            // Skip this if you are running earlier versions of Xcode
+
+            // Add -ld_classic to OTHER_LDFLAGS
             // https://forum.unity.com/threads/project-wont-build-using-xode15-release-candidate.1491761/
             // https://developer.apple.com/documentation/xcode-release-notes/xcode-15-release-notes#Linking
-
-            string projectPath = PBXProject.GetPBXProjectPath(report.summary.outputPath);
 
             PBXProject pbxProject = new();
             pbxProject.ReadFromFile(projectPath);
@@ -25,7 +37,18 @@ namespace WorldInstrument
 
             pbxProject.AddBuildProperty(target, "OTHER_LDFLAGS", "-ld_classic");
             pbxProject.WriteToFile(projectPath);
-#endif // UNITY_IOS
         }
+
+        private static void ModifyInfoPlist(string projectPath)
+        {
+            string plistPath = Path.Join(projectPath, "/Info.plist");
+            var plist = new PlistDocument();
+            plist.ReadFromFile(plistPath);
+
+            plist.root.SetString("ITSAppUsesNonExemptEncryption", "false");
+
+            plist.WriteToFile(plistPath);
+        }
+#endif // UNITY_IOS
     }
 }
