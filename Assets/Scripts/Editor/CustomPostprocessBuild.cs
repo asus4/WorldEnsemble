@@ -7,7 +7,10 @@ namespace WorldInstrument
     using UnityEditor.iOS.Xcode;
 #endif // UNITY_IOS
 
-    public class CustomPostBuildProcessor : IPostprocessBuildWithReport
+    /// <summary>
+    /// Project specific postprocess build script.
+    /// </summary>
+    public sealed class CustomPostprocessBuild : IPostprocessBuildWithReport
     {
         public int callbackOrder => 0;
 
