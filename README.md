@@ -1,4 +1,4 @@
-# World Instruments
+# World Instrument
 
 ## Simulate on Unity Editor
 
