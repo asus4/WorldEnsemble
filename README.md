@@ -1,8 +1,8 @@
-# Augmented Instruments
+# World Instruments
 
 ## Simulate on Unity Editor
 
-- Change platform to iOS and Play `Scenes/Onboarding` or `Scenes/Performance`
+- Change the platform to iOS and Play `Scenes/Onboarding` or `Scenes/Performance`.
 
 ## How to build
 
