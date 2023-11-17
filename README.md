@@ -4,7 +4,7 @@ Our team's submission for [Google’s Immersive Geospatial Challenge](https://go
 
 ## Tested Environment
 
-- Unity 2022.3.12f1. Should be compatible Unity 2022 LTS.
+- Unity 2022.3.12f1. Should be compatible with Unity 2022 LTS.
 - macOS. Windows is not supported for now.
 
 ## Simulate on Unity Editor
@@ -16,12 +16,14 @@ Our team's submission for [Google’s Immersive Geospatial Challenge](https://go
 
 ## How to build for iOS / Android
 
-- Go Google's developer console and get the API key for Google Geospatial API.
+- Go to Google's developer console and get the API key for Google Geospatial API.
   - See [AR Core Geospatial website](https://developers.google.com/ar/develop/ios/geospatial/enable) for more detail.
 - Open `Project Settings/XR Plug-in Management/ARCore Extensions`
 - Enter your Google Geospatial API key to `ProjectSettings/ARCoreExtensionsProjectSettings.json`
 - Build for each platform.
-  - iOS: We tested with Xcode 15.0. If you use earlier version of Xcode, Disable the post-build-process at [CustomPostprocessBuild.cs](https://github.com/asus4/WorldInstrument/blob/main/Assets/Scripts/Editor/CustomPostprocessBuild.cs).
+  - iOS: We tested with Xcode 15.0. If you use the earlier version of Xcode, Disable the post-build-process at [CustomPostprocessBuild.cs](https://github.com/asus4/WorldInstrument/blob/main/Assets/Scripts/Editor/CustomPostprocessBuild.cs).
+ 
+![fig-apikey](https://github.com/asus4/WorldInstrument/assets/357497/e8ddbacc-54e5-4ac2-90a7-aa2e2d80f978)
 
 ## Our Team
 
