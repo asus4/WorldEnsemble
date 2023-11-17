@@ -14,6 +14,9 @@ Our team's submission for [Google’s Immersive Geospatial Challenge](https://go
   Editor Simulation on Android is not supported for now.
 - Play and Enjoy the scene `Scenes/WorldInstrument`.
 
+![fig-switch-platform](https://github.com/asus4/WorldInstrument/assets/357497/2bbcb90a-5f6f-4d2a-87a1-65db73f74a36)
+
+
 ## How to build for iOS / Android
 
 - Go to Google's developer console and get the API key for Google Geospatial API.
@@ -23,7 +26,8 @@ Our team's submission for [Google’s Immersive Geospatial Challenge](https://go
 - Build for each platform.
   - iOS: We tested with Xcode 15.0. If you use the earlier version of Xcode, Disable the post-build-process at [CustomPostprocessBuild.cs](https://github.com/asus4/WorldInstrument/blob/main/Assets/Scripts/Editor/CustomPostprocessBuild.cs).
  
-![fig-apikey](https://github.com/asus4/WorldInstrument/assets/357497/e8ddbacc-54e5-4ac2-90a7-aa2e2d80f978)
+![fig-apikey](https://github.com/asus4/WorldInstrument/assets/357497/6c6beadc-3c74-4cd4-92fa-95f82571bf7f)
+
 
 ## Our Team
 
