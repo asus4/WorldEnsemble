@@ -39,7 +39,6 @@ This work is licensed under a [Creative Commons Attribution 4.0 International Li
 
 [cc-by]: http://creativecommons.org/licenses/by/4.0/
 [cc-by-image]: https://i.creativecommons.org/l/by/4.0/88x31.png
-[cc-by-shield]: https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg
 
 See [LICENSE](https://github.com/asus4/WorldInstrument/blob/main/LICENSE) for more.
 
@@ -53,5 +52,6 @@ See [LICENSE](https://github.com/asus4/WorldInstrument/blob/main/LICENSE) for mo
 ### Libraries
 
 - [ARCore Extensions](https://github.com/google-ar/arcore-unity-extensions): Apache 2.0 and [ARCore Additional Terms of Service](https://developers.google.com/ar/develop/terms)
+- [Cesium for Unity](https://github.com/CesiumGS/cesium-unity): Apache 2.0
 - [AR Foundation Replay](https://github.com/asus4/ARFoundationReplay): Unlicense
 - [MemoryPack](https://github.com/Cysharp/MemoryPack): MIT
