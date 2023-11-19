@@ -4943,7 +4943,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -60682438946679272, guid: 871eaeaf614e44b7d8247d4000ee46db,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: b98cf7536fed1463c8ae3096c7135bb4, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9e30b1b47214c4ec682aea6881463db9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5042,7 +5042,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _settings: {fileID: 11400000, guid: 80153d4f9a0b24d128de5c208dab0bbc, type: 2}
-  _beat: 8448
+  _beat: 8192
   _audioSource: {fileID: 5311087629731327772}
   _particle: {fileID: 8191341262032346625}
 --- !u!1001 &6571362294957283317
