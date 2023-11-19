@@ -24,10 +24,12 @@ namespace WorldInstrument
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
+    using UnityEngine.Events;
     using UnityEngine.XR.ARFoundation;
     using UnityEngine.XR.ARSubsystems;
     using Unity.XR.CoreUtils;
     using Google.XR.ARCoreExtensions;
+    using UnityEngine.Assertions;
 
 #if UNITY_ANDROID
     using UnityEngine.Android;
@@ -38,6 +40,15 @@ namespace WorldInstrument
     /// </summary>
     public sealed class StreetscapeGeometryController : MonoBehaviour
     {
+        public sealed class AREarthManagerEventArgs
+        {
+            public AREarthManager earthManager;
+            public XROrigin origin;
+        }
+
+        [System.Serializable]
+        public sealed class AREarthManagerEvent : UnityEvent<AREarthManagerEventArgs> { }
+
         [SerializeField]
         private MeshFilter streetscapeGeometryPrefab;
 
@@ -46,15 +57,21 @@ namespace WorldInstrument
         [SerializeField]
         private bool calculateTangent = false;
 
+        public AREarthManagerEvent onEarthInitialized;
+
         private readonly Dictionary<TrackableId, GameObject> _streetScapeGeometries = new();
+        private XROrigin _origin;
         private AREarthManager _earthManager;
         private ARStreetscapeGeometryManager _streetScapeGeometryManager;
 
+
+
         private void Awake()
         {
-            var origin = FindObjectOfType<XROrigin>();
-            _earthManager = origin.GetComponent<AREarthManager>();
-            _streetScapeGeometryManager = origin.GetComponent<ARStreetscapeGeometryManager>();
+            _origin = FindObjectOfType<XROrigin>();
+            Assert.IsNotNull(_origin, "No XROrigin found in the scene.");
+            _earthManager = _origin.GetComponent<AREarthManager>();
+            _streetScapeGeometryManager = _origin.GetComponent<ARStreetscapeGeometryManager>();
         }
 
         public void OnEnable()
@@ -95,6 +112,15 @@ namespace WorldInstrument
                 Debug.LogWarning($"Geospatial sample encountered an EarthState error: {earthState}");
                 yield break;
             }
+
+            Debug.Log($"Earth state: {earthState}");
+
+            var args = new AREarthManagerEventArgs
+            {
+                earthManager = _earthManager,
+                origin = _origin,
+            };
+            onEarthInitialized?.Invoke(args);
         }
 
 
