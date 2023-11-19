@@ -9,8 +9,17 @@ namespace WorldInstrument
     /// </summary>
     public sealed class WorldInstrument : MonoBehaviour
     {
+        public enum Mode
+        {
+            OneShot,
+            AmbientLoop,
+        }
+
         [SerializeField]
         private AppSettings _settings;
+
+        [SerializeField]
+        private Mode _mode = Mode.OneShot;
 
         [SerializeField]
         private SixteenthBeat _beat;
@@ -24,11 +33,11 @@ namespace WorldInstrument
         private int _lastSixteenthBeat = -1;
         private StreetscapeGeometryInstrument _parentStreetscape;
 
+        public bool IsPlaying => _audioSource.isPlaying;
 
         private void Start()
         {
             _parentStreetscape = GetComponentInParent<StreetscapeGeometryInstrument>();
-            Assert.IsNotNull(_parentStreetscape);
         }
 
         private void OnDestroy()
@@ -63,6 +72,11 @@ namespace WorldInstrument
 
         public void Trigger(double delay)
         {
+            if (_mode == Mode.AmbientLoop && _audioSource.isPlaying)
+            {
+                return;
+            }
+
             _audioSource.PlayScheduled(delay);
 
             if (_parentStreetscape != null)

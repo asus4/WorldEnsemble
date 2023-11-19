@@ -34,6 +34,8 @@ namespace WorldInstrument
         [Header("Scene References")]
         [SerializeField]
         private RaycastCursor _cursor;
+        [SerializeField]
+        private WorldInstrument _ambientInstrument;
 
 
         [Header("Events")]
@@ -155,6 +157,15 @@ namespace WorldInstrument
 
         private void AddInstrument(ref RaycastHit hit)
         {
+            // Special rule for ambient sound
+            if (_instruments.Count == 3 && !_ambientInstrument.IsPlaying)
+            {
+                _sequencer.RegisterReceiver(_ambientInstrument);
+                Debug.Log($"ambient started: {_ambientInstrument.name}", _ambientInstrument);
+                return;
+            }
+
+            // General rule: other instruments are placed on the hit point
             Quaternion rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
             var prefab = _instrumentPrefabs[_instruments.Count % _instrumentPrefabs.Length];
             var instrument = Instantiate(prefab, hit.point, rotation);

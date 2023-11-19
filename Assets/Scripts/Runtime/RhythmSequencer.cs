@@ -77,5 +77,10 @@ namespace WorldInstrument
         {
             _instruments.Add(instrument);
         }
+
+        public void UnregisterReceiver(WorldInstrument instrument)
+        {
+            _instruments.Remove(instrument);
+        }
     }
 }
