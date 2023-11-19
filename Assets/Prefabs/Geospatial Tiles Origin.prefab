@@ -193,7 +193,7 @@ MonoBehaviour:
   _preloadSiblings: 0
   _forbidHoles: 0
   _maximumSimultaneousTileLoads: 4
-  _maximumCachedBytes: 20000000
+  _maximumCachedBytes: 15000000
   _loadingDescendantLimit: 1
   _enableFrustumCulling: 1
   _enableFogCulling: 1
