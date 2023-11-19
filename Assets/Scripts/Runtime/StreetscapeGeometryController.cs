@@ -57,6 +57,11 @@ namespace WorldEnsemble
         [SerializeField]
         private bool calculateTangent = false;
 
+        [SerializeField]
+        [Range(0.01f, 0.1f)]
+        private float accuracySDThreshold = 0.02f;
+
+
         public AREarthManagerEvent onEarthInitialized;
 
         private readonly Dictionary<TrackableId, GameObject> _streetScapeGeometries = new();
@@ -113,7 +118,7 @@ namespace WorldEnsemble
                 yield break;
             }
 
-            yield return WaitUntilAccuracyConverge(120, 0.02);
+            yield return WaitUntilAccuracyConverge(120, accuracySDThreshold);
 
             var args = new AREarthManagerEventArgs
             {
@@ -122,6 +127,7 @@ namespace WorldEnsemble
             };
             onEarthInitialized?.Invoke(args);
         }
+
 
         private IEnumerator WaitUntilAccuracyConverge(int frameCount, double threshold)
         {
