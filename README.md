@@ -1,4 +1,4 @@
-# World Instrument
+# World Ensemble
 
 Our team's submission for [Google’s Immersive Geospatial Challenge](https://googlesimmersive.devpost.com/) hackathon.
 
@@ -12,7 +12,7 @@ Our team's submission for [Google’s Immersive Geospatial Challenge](https://go
 - Pull this repository with **[Git-LFS](https://git-lfs.com/)**.
 - Simulation on the Unity Editor is supported only on iOS. Open Build Settings and switch the platform to iOS.
   ![fig-switch-platform](https://github.com/asus4/WorldInstrument/assets/357497/2bbcb90a-5f6f-4d2a-87a1-65db73f74a36)
-- Play and Enjoy the scene `Scenes/WorldInstrument`.
+- Play and Enjoy the scene `Scenes/Main`.
 
 ## How to build for iOS / Android
 

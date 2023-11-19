@@ -1,5 +1,5 @@
 
-namespace WorldInstrument
+namespace WorldEnsemble
 {
     using UnityEngine;
     using UnityEngine.Assertions;

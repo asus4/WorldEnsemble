@@ -1,4 +1,4 @@
-namespace WorldInstrument
+namespace WorldEnsemble
 {
     using UnityEngine;
 

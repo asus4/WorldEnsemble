@@ -1,7 +1,8 @@
 
-namespace WorldInstrument
+namespace WorldEnsemble
 {
     using System.Collections.Generic;
+    using Unity.Mathematics;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.InputSystem;
@@ -45,6 +46,7 @@ namespace WorldInstrument
         private Vector2 _lastPointerPosition;
         private RhythmSequencer _sequencer;
 
+        private Queue<double3> _accuracies = new();
 
         private InputAction[] AllActions => new InputAction[]
         {

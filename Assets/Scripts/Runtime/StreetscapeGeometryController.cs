@@ -19,7 +19,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace WorldInstrument
+namespace WorldEnsemble
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -122,7 +122,11 @@ namespace WorldInstrument
             };
             onEarthInitialized?.Invoke(args);
         }
-
+        private void Update()
+        {
+            var pose = _earthManager.CameraGeospatialPose;
+            Debug.Log($"accuracy: yaw {pose.OrientationYawAccuracy} vertical: {pose.VerticalAccuracy} horizontal: {pose.HorizontalAccuracy}");
+        }
 
         private void GetStreetscapeGeometry(ARStreetscapeGeometriesChangedEventArgs eventArgs)
         {
