@@ -716,10 +716,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 662.9999389648438,
-            "y": 1298.9998779296875,
-            "width": 161.00006103515626,
-            "height": 34.0001220703125
+            "x": 662.0,
+            "y": 1263.0,
+            "width": 161.0,
+            "height": 34.0
         }
     },
     "m_Slots": [
@@ -758,8 +758,8 @@
     "m_ObjectId": "d0a682d50cf2466c9ff5a9bf83ea384c",
     "m_Title": "Global Property",
     "m_Position": {
-        "x": 637.5669555664063,
-        "y": 1239.5570068359375
+        "x": 637.0,
+        "y": 1204.0
     }
 }
 

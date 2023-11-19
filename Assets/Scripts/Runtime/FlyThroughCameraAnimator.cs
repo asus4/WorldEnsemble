@@ -3,6 +3,7 @@ namespace WorldEnsemble
     using System.Collections;
     using UnityEngine;
     using UnityEngine.Events;
+    using UnityEngine.Serialization;
 
     [RequireComponent(typeof(Camera))]
     public sealed class FlyThroughCameraAnimator : MonoBehaviour
@@ -26,8 +27,20 @@ namespace WorldEnsemble
         [Range(0.0f, 1.0f)]
         private float _weight = 1.0f;
 
-        public UnityEvent onArriveStart;
-        public UnityEvent onArriveEnd;
+        [SerializeField]
+        [Range(0.0f, 10.0f)]
+        private float _flyInDuration = 3.0f;
+        [SerializeField]
+        [Range(0.0f, 10.0f)]
+        private float _flyOutDuration = 3.0f;
+        [SerializeField]
+        [Range(0.0f, 10.0f)]
+        private float _flyOutInDuration = 3.0f;
+
+        [FormerlySerializedAs("onWeightActive")]
+        public UnityEvent onActive;
+        [FormerlySerializedAs("onWeightInactive")]
+        public UnityEvent onInactive;
 
 
         private static readonly int _FlyThroughWeight = Shader.PropertyToID("_FlyThroughWeight");
@@ -58,17 +71,25 @@ namespace WorldEnsemble
 
             _camera.enabled = materialWeight > 0.01f;
 
+            // if (_weight < 1)
+            // {
+            //     onActive?.Invoke();
+            // }
+            // else if (_weight >= 1)
+            // {
+            //     onInactive?.Invoke();
+            // }
             _prevWeight = _weight;
         }
 
         public void FlyIn()
         {
-            Animate(0, 1, 3);
+            Animate(0, 1, _flyInDuration);
         }
 
         public void FlyOut()
         {
-            Animate(1, 0, 3);
+            Animate(1, 0, _flyOutDuration);
         }
 
         public void FlyOutIn()
@@ -82,8 +103,9 @@ namespace WorldEnsemble
 
         private IEnumerator FlyOutInInternal()
         {
-            yield return AnimateInternal(1, 0, 1.5f);
-            yield return AnimateInternal(0, 1, 1.5f);
+            float d = _flyOutInDuration / 2;
+            yield return AnimateInternal(1, 0, d);
+            yield return AnimateInternal(0, 1, d);
         }
 
         public void Animate(float from, float to, float duration)
@@ -108,14 +130,6 @@ namespace WorldEnsemble
             }
 
             _weight = to;
-            if (to == 0)
-            {
-                onArriveStart?.Invoke();
-            }
-            else
-            {
-                onArriveEnd?.Invoke();
-            }
         }
     }
 }

@@ -3,6 +3,7 @@ namespace WorldEnsemble
 {
     using System.Collections.Generic;
     using Unity.Mathematics;
+    using Unity.XR.CoreUtils;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.InputSystem;
@@ -45,8 +46,7 @@ namespace WorldEnsemble
         private readonly List<WorldInstrument> _instruments = new();
         private Vector2 _lastPointerPosition;
         private RhythmSequencer _sequencer;
-
-        private Queue<double3> _accuracies = new();
+        private Camera _arCamera;
 
         private InputAction[] AllActions => new InputAction[]
         {
@@ -70,6 +70,10 @@ namespace WorldEnsemble
             AudioListener audioListener = FindObjectOfType<AudioListener>();
             _sequencer = new RhythmSequencer();
             _sequencer.Start(_settings.BPM, audioListener);
+
+
+            var origin = FindObjectOfType<XROrigin>();
+            _arCamera = origin.Camera;
         }
 
         private void OnDestroy()
@@ -122,7 +126,7 @@ namespace WorldEnsemble
         private void Raycast(bool idTouchEnd)
         {
             // Raycast to streetscape geometries
-            Ray ray = Camera.main.ScreenPointToRay(_lastPointerPosition);
+            Ray ray = _arCamera.ScreenPointToRay(_lastPointerPosition);
 
             if (!Physics.Raycast(ray, out RaycastHit hit))
             {
@@ -153,7 +157,7 @@ namespace WorldEnsemble
         private void OnKick(InputAction.CallbackContext ctx)
         {
             // Keep this for testing on Editor
-            Ray ray = Camera.main.ScreenPointToRay(_lastPointerPosition);
+            Ray ray = _arCamera.ScreenPointToRay(_lastPointerPosition);
             OnTapEndNothing(ray);
         }
 

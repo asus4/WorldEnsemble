@@ -192,7 +192,7 @@ MonoBehaviour:
   _preloadAncestors: 0
   _preloadSiblings: 0
   _forbidHoles: 0
-  _maximumSimultaneousTileLoads: 10
+  _maximumSimultaneousTileLoads: 4
   _maximumCachedBytes: 20000000
   _loadingDescendantLimit: 1
   _enableFrustumCulling: 1
@@ -207,7 +207,7 @@ MonoBehaviour:
     _maximumAttenuation: 0
     _baseResolution: 0
   _suspendUpdate: 0
-  _showTilesInHierarchy: 1
+  _showTilesInHierarchy: 0
   _updateInEditor: 1
   _logSelectionStats: 0
   _createPhysicsMeshes: 0
@@ -475,6 +475,24 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
+      time: 0.45121828
+      value: 0.37756145
+      inSlope: 1.3994616
+      outSlope: 1.3994616
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.10526828
+    - serializedVersion: 3
+      time: 0.7006069
+      value: 0.9126345
+      inSlope: 0.83614486
+      outSlope: 0.83614486
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.09895517
+      outWeight: 0.33333334
+    - serializedVersion: 3
       time: 1
       value: 1
       inSlope: 0
@@ -499,7 +517,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.8946017
+      time: 0.7055893
       value: 1
       inSlope: 0
       outSlope: 0
@@ -520,13 +538,15 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _weight: 0
-  _alpha: 0.8
-  onArriveStart:
+  _flyInDuration: 4
+  _flyOutDuration: 4
+  _flyOutInDuration: 4.58
+  onActive:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3357548740807866519}
-        m_TargetAssemblyTypeName: CesiumForUnity.Cesium3DTileset, CesiumRuntime
-        m_MethodName: set_showCreditsOnScreen
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -535,13 +555,13 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
-        m_CallState: 2
-  onArriveEnd:
+        m_CallState: 0
+  onInactive:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3357548740807866519}
-        m_TargetAssemblyTypeName: CesiumForUnity.Cesium3DTileset, CesiumRuntime
-        m_MethodName: set_showCreditsOnScreen
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -550,7 +570,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 0
 --- !u!1 &3621217850165211362
 GameObject:
   m_ObjectHideFlags: 0
