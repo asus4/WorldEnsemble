@@ -2,6 +2,10 @@ namespace WorldInstrument
 {
     using UnityEngine;
 
+    /// <summary>
+    /// Times passed to each instrument
+    /// Also exposed to shaders as a global parameter.
+    /// </summary>
     public readonly struct SequencerTimes
     {
         public readonly double dspTime;
