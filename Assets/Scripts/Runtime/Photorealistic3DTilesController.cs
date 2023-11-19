@@ -65,8 +65,8 @@ namespace WorldEnsemble
             cameraTransform.GetPositionAndRotation(out Vector3 position, out Quaternion rotation);
 
             // Not sure why 180 degree rotation?
-            rotation *= Quaternion.Euler(0, 180, 0);
-            _georeference.transform.SetPositionAndRotation(position, rotation);
+            // rotation *= Quaternion.Euler(0, 180, 0);
+            // _georeference.transform.SetPositionAndRotation(position, rotation);
 
             _georeference.SetOriginLongitudeLatitudeHeight(
                 geoPose.Longitude,
@@ -79,6 +79,10 @@ namespace WorldEnsemble
 
         private string GetApiKey()
         {
+#if UNITY_EDITOR
+            _runtimeConfig.IOSCloudServicesApiKey = ARCoreExtensionsProjectSettings.Instance.IOSCloudServicesApiKey;
+#endif // UNITY_EDITOR
+
             var platform = Application.platform;
             if (Application.isEditor || platform == RuntimePlatform.IPhonePlayer)
             {

@@ -113,7 +113,7 @@ namespace WorldEnsemble
                 yield break;
             }
 
-            Debug.Log($"Earth state: {earthState}");
+            yield return WaitUntilAccuracyConverge(120, 0.02);
 
             var args = new AREarthManagerEventArgs
             {
@@ -122,10 +122,29 @@ namespace WorldEnsemble
             };
             onEarthInitialized?.Invoke(args);
         }
-        private void Update()
+
+        private IEnumerator WaitUntilAccuracyConverge(int frameCount, double threshold)
         {
-            var pose = _earthManager.CameraGeospatialPose;
-            Debug.Log($"accuracy: yaw {pose.OrientationYawAccuracy} vertical: {pose.VerticalAccuracy} horizontal: {pose.HorizontalAccuracy}");
+            Queue<double> accuracyQueue = new();
+
+            // Wait until queue is full
+            yield return new WaitUntil(() =>
+            {
+                var pose = _earthManager.CameraGeospatialPose;
+                accuracyQueue.Enqueue(pose.OrientationYawAccuracy);
+                return accuracyQueue.Count > frameCount;
+            });
+
+            // Wait until accuracy converge
+            yield return new WaitUntil(() =>
+            {
+                var pose = _earthManager.CameraGeospatialPose;
+                accuracyQueue.Dequeue();
+                accuracyQueue.Enqueue(pose.OrientationYawAccuracy);
+                double stdDev = accuracyQueue.StandardDeviation();
+                Debug.Log($"yar accuracy: {pose.OrientationYawAccuracy}, StandardDeviation: {stdDev}");
+                return stdDev < threshold;
+            });
         }
 
         private void GetStreetscapeGeometry(ARStreetscapeGeometriesChangedEventArgs eventArgs)

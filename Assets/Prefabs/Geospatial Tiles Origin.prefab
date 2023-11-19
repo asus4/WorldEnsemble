@@ -32,6 +32,7 @@ Transform:
   m_Children:
   - {fileID: 3370004703899870659}
   - {fileID: 1232978499031566498}
+  - {fileID: 2323518769972537036}
   - {fileID: 3102246908144305531}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -83,7 +84,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 250, y: 250, z: 250}
+  m_LocalScale: {x: 400, y: 400, z: 400}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3102246908144305531}
@@ -210,6 +211,89 @@ MonoBehaviour:
   _updateInEditor: 1
   _logSelectionStats: 0
   _createPhysicsMeshes: 0
+--- !u!1 &3558050114462701322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2323518769972537036}
+  - component: {fileID: 1205975214707202148}
+  - component: {fileID: 8476803882288324481}
+  m_Layer: 6
+  m_Name: CameraGeospatialPoseAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2323518769972537036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3558050114462701322}
+  serializedVersion: 2
+  m_LocalRotation: {x: 2.7755576e-17, y: -2.1131625e-18, z: 2.7516552e-18, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5085556213269508696}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1205975214707202148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3558050114462701322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74f14e1eb550b9a4fb6c0a2f0456845b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _adjustOrientationForGlobeWhenMoving: 0
+  _detectTransformChanges: 0
+  _localToGlobeFixedMatrix:
+    c0:
+      x: -0.2312382985972905
+      y: 0.9728971421799072
+      z: 0
+      w: 0
+    c1:
+      x: 0.5925699109106847
+      y: 0.14084208089244882
+      z: 0.7931105906071285
+      w: 0
+    c2:
+      x: -0.7716150270342936
+      y: -0.1833975435714846
+      z: 0.6090776560232792
+      w: 0
+    c3:
+      x: 3787528.507510179
+      y: 900220.1877199397
+      z: 5035388.187274391
+      w: 1
+  _localToGlobeFixedMatrixIsValid: 1
+--- !u!114 &8476803882288324481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3558050114462701322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70e286fc3a0f14d4d8d546c4b78b444c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _earthManager: {fileID: 0}
+  _angleOffset: {x: 0, y: 0, z: 90}
 --- !u!1 &3580745613064018525
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,7 +437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetStart: {fileID: 1232978499031566498}
-  _targetEnd: {fileID: 0}
+  _targetEnd: {fileID: 2323518769972537036}
   _positionEasing:
     serializedVersion: 2
     m_Curve:
@@ -436,6 +520,37 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _weight: 0
+  _alpha: 0.8
+  onArriveStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3357548740807866519}
+        m_TargetAssemblyTypeName: CesiumForUnity.Cesium3DTileset, CesiumRuntime
+        m_MethodName: set_showCreditsOnScreen
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  onArriveEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3357548740807866519}
+        m_TargetAssemblyTypeName: CesiumForUnity.Cesium3DTileset, CesiumRuntime
+        m_MethodName: set_showCreditsOnScreen
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3621217850165211362
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,8 +1,8 @@
 namespace WorldEnsemble
 {
     using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
+    using UnityEngine.Events;
 
     [RequireComponent(typeof(Camera))]
     public sealed class FlyThroughCameraAnimator : MonoBehaviour
@@ -25,6 +25,10 @@ namespace WorldEnsemble
         [SerializeField]
         [Range(0.0f, 1.0f)]
         private float _weight = 1.0f;
+
+        public UnityEvent onArriveStart;
+        public UnityEvent onArriveEnd;
+
 
         private static readonly int _FlyThroughWeight = Shader.PropertyToID("_FlyThroughWeight");
         private Camera _camera;
@@ -104,6 +108,14 @@ namespace WorldEnsemble
             }
 
             _weight = to;
+            if (to == 0)
+            {
+                onArriveStart?.Invoke();
+            }
+            else
+            {
+                onArriveEnd?.Invoke();
+            }
         }
     }
 }
