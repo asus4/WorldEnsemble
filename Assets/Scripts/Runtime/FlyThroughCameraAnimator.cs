@@ -30,6 +30,7 @@ namespace WorldInstrument
         private Camera _camera;
         private Transform _transform;
         private Coroutine _tweenCoroutine;
+        private float _prevWeight = float.NegativeInfinity;
 
         private void OnEnable()
         {
@@ -39,6 +40,11 @@ namespace WorldInstrument
 
         private void Update()
         {
+            if (_prevWeight == _weight)
+            {
+                return;
+            }
+
             Vector3 position = Vector3.Lerp(_targetStart.position, _targetEnd.position, _positionEasing.Evaluate(_weight));
             Quaternion rotation = Quaternion.Lerp(_targetStart.rotation, _targetEnd.rotation, _rotationEasing.Evaluate(_weight));
             _transform.SetPositionAndRotation(position, rotation);
@@ -47,6 +53,8 @@ namespace WorldInstrument
             Shader.SetGlobalFloat(_FlyThroughWeight, materialWeight);
 
             _camera.enabled = materialWeight > 0.01f;
+
+            _prevWeight = _weight;
         }
 
         public void FlyIn()
@@ -70,8 +78,8 @@ namespace WorldInstrument
 
         private IEnumerator FlyOutInInternal()
         {
-            yield return AnimateInternal(1, 0, 2);
-            yield return AnimateInternal(0, 1, 2);
+            yield return AnimateInternal(1, 0, 1.5f);
+            yield return AnimateInternal(0, 1, 1.5f);
         }
 
         public void Animate(float from, float to, float duration)

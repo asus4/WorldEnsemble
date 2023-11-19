@@ -1,5 +1,5 @@
-#ifndef CUSTOM_CESIUM_TILESET_INCLUDE
-#define CUSTOM_CESIUM_TILESET_INCLUDE
+#ifndef PHOTOREALISTIC_TILESET_INCLUDE
+#define PHOTOREALISTIC_TILESET_INCLUDE
 
 /*
 Based on CesiumUnlitTilesetShader.
@@ -80,4 +80,4 @@ void CesiumSampleRasterOverlays_half(
    OUT = color;
 }
 
-#endif // CUSTOM_CESIUM_TILESET_INCLUDE
+#endif // PHOTOREALISTIC_TILESET_INCLUDE
