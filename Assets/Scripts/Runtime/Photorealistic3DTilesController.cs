@@ -2,8 +2,8 @@ namespace WorldInstrument
 {
     using UnityEngine;
     using UnityEngine.Assertions;
+    using UnityEngine.Events;
     using CesiumForUnity;
-    using Google.XR.ARCoreExtensions;
     using Google.XR.ARCoreExtensions.Internal;
 
     /// <summary>
@@ -11,6 +11,7 @@ namespace WorldInstrument
     /// </summary>
     public sealed class Photorealistic3DTilesController : MonoBehaviour
     {
+
         [SerializeField]
         private RuntimeConfig _runtimeConfig;
 
@@ -20,10 +21,12 @@ namespace WorldInstrument
         [SerializeField]
         private CesiumGeoreference _georeference;
 
+        public UnityEvent onTilesetLoaded;
+
         private const string BASE_USL = "https://tile.googleapis.com/v1/3dtiles/root.json?key=";
 
         private Cesium3DTileset _tileset;
-
+        private bool _hasTilesetLoaded = false;
 
         private void Start()
         {
@@ -38,7 +41,20 @@ namespace WorldInstrument
             _streetscapeGeometryController.onEarthInitialized.RemoveListener(OnEarthManagerInitialized);
         }
 
+        private void Update()
+        {
+            if (_hasTilesetLoaded || _tileset == null)
+            {
+                return;
+            }
 
+            float progress = _tileset.ComputeLoadProgress();
+            if (progress >= 100)
+            {
+                _hasTilesetLoaded = true;
+                onTilesetLoaded?.Invoke();
+            }
+        }
 
         private void OnEarthManagerInitialized(StreetscapeGeometryController.AREarthManagerEventArgs args)
         {
