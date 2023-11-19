@@ -19,7 +19,7 @@ namespace WorldInstrument
 #if UNITY_IOS
             string projectPath = PBXProject.GetPBXProjectPath(report.summary.outputPath);
             ModifyPBXProject(projectPath);
-            ModifyInfoPlist(projectPath);
+            ModifyInfoPlist(report.summary.outputPath);
 #endif // UNITY_IOS
         }
 
