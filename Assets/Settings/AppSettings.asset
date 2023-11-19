@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f763e6539a68a47e991297391a376766, type: 3}
   m_Name: AppSettings
   m_EditorClassIdentifier: 
-  BPM: 120
+  BPM: 60
   offset16BeatByDistanceMeter: 2
   soundSpeedInAir: 340
