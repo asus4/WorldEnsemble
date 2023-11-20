@@ -1,7 +1,6 @@
 namespace WorldEnsemble
 {
     using UnityEngine;
-    using UnityEngine.Assertions;
     using UnityEngine.XR.ARSubsystems;
     using Unity.Mathematics;
     using CesiumForUnity;
@@ -14,23 +13,30 @@ namespace WorldEnsemble
         private AREarthManager _earthManager;
 
         [SerializeField]
-        private Vector3 _angleOffset;
+        private Vector3 _angleOffsetIOS;
 
         private CesiumGlobeAnchor _globeAnchor;
-        private Quaternion _rotationOffset;
+        private Quaternion _rotationOffset = Quaternion.identity;
 
         private void Start()
         {
             _globeAnchor = GetComponent<CesiumGlobeAnchor>();
-            _rotationOffset = quaternion.EulerXYZ(_angleOffset * Mathf.Deg2Rad);
+
+#if UNITY_IOS
+            // FIXME: EunRotation is rotated 90 degrees on iOS platform.
+            // Is this an issue in ARCore Extensions?
+            _rotationOffset = quaternion.EulerXYZ(_angleOffsetIOS * Mathf.Deg2Rad);
+#endif // UNITY_IOS
         }
 
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            _rotationOffset = quaternion.EulerXYZ(_angleOffset * Mathf.Deg2Rad);
+#if UNITY_IOS
+            _rotationOffset = quaternion.EulerXYZ(_angleOffsetIOS * Mathf.Deg2Rad);
+#endif // UNITY_IOS
         }
-#endif
+#endif // UNITY_EDITOR
 
         private void Update()
         {

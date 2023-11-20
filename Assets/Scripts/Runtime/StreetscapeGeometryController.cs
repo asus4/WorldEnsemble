@@ -58,8 +58,8 @@ namespace WorldEnsemble
         private bool calculateTangent = false;
 
         [SerializeField]
-        [Range(0.01f, 0.1f)]
-        private float accuracySDThreshold = 0.02f;
+        [Range(0.01f, 0.5f)]
+        private float accuracySDThreshold = 0.2f;
 
 
         public AREarthManagerEvent onEarthInitialized;

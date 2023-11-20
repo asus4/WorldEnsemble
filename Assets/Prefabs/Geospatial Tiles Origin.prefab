@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _earthManager: {fileID: 0}
-  _angleOffset: {x: 0, y: 0, z: 90}
+  _angleOffsetIOS: {x: 0, y: 0, z: 90}
 --- !u!1 &3580745613064018525
 GameObject:
   m_ObjectHideFlags: 0

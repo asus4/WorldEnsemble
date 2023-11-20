@@ -57,6 +57,10 @@ namespace WorldEnsemble
 
         private void Awake()
         {
+#if UNITY_ANDROID && UNITY_EDITOR
+            Debug.LogError("Sorry, AR simulation on Editor is supported only on iOS. Please switch to iOS platform.");
+#endif// UNITY_ANDROID
+
             Application.targetFrameRate = 60;
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
 

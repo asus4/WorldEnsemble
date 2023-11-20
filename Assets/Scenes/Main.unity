@@ -630,7 +630,7 @@ MonoBehaviour:
     type: 3}
   calculateNormal: 1
   calculateTangent: 1
-  accuracySDThreshold: 0.04
+  accuracySDThreshold: 0.1
   onEarthInitialized:
     m_PersistentCalls:
       m_Calls: []
