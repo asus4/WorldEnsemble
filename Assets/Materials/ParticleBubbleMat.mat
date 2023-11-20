@@ -117,10 +117,11 @@ Material:
     - _DstBlendAlpha: 10
     - _EnvironmentReflections: 1
     - _FrenselPoewr: 2.45
+    - _FrenselPower: 2
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _LoudnessMultiplier: 0.9
+    - _LoudnessMultiplier: 0.7
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005

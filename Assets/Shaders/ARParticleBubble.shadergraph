@@ -1277,7 +1277,7 @@
     "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
     "m_ObjectId": "2c13bbb4d2164c06a3fa925ec450e904",
     "m_Title": "Custom Vertex Streams",
-    "m_Content": "UV0.xr : size.xy\nUV1.xyz: center.xyz (world space)\n",
+    "m_Content": "UV0.zw : size.xy\nUV1.xyz: center.xyz (world space)\n",
     "m_TextSize": 0,
     "m_Theme": 0,
     "m_Position": {
