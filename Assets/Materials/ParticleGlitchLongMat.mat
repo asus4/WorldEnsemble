@@ -97,13 +97,13 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _FrenselPower: 1.32
+    - _FrenselPower: 1.43
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _OverlayBlend: 0.631
+    - _OverlayBlend: 1
     - _Parallax: 0.005
     - _QueueControl: 1
     - _QueueOffset: 0
