@@ -79,7 +79,6 @@ crashlytics-build.properties
 # Specific for World Instrument Project
 ########################################
 
-*.mp4
 # Ignore my API keys
 ProjectSettings/ARCoreExtensionsProjectSettings.json
 # Ignore ARCore extensions library
